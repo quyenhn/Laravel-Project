@@ -6,19 +6,22 @@ Danh sach bai viet
  <div class="container">
     @if(count($articles)>0)
                   <div class="row ">
-              <div class="col-sm-6 col-sm-offset-3">
+              <div class="col-sm-8 col-sm-offset-2">
                   <i>Danh sach toan bo cac bai viet nguoi dung da tao:</i>
               </div>
           </div>
         @foreach ($articles as $a)
         <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-8 col-sm-offset-2">
                 <h2>{{$a->title}}</h2>
-                <!-- <p>{{$a->content}}</p> -->
-                <small>Updated at: {{$a->updated_at}}</small>
-                <p><a href="{{route('article.show',$a->id)}}">Read more</a></p>
+                <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $a->image }}" />
+                <p>{{$a->description}}</p> 
+                <small>Updated at: {{$a->updated_at}}, Author: {{$a->user->name}}</small>
+                <br>
+                <div style="font-size: 20px;"><a href="{{route('article.show',$a->id)}}">Read more</a></div>
             </div>
         </div>
+        <hr>
         @endforeach
     @else
 <div class="col-sm-6 col-sm-offset-3">

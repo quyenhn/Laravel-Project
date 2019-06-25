@@ -5,6 +5,7 @@ use DB;
 use Auth;
 use App\Article;
 use App\User;
+use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\ArticleFormRequest;
@@ -30,12 +31,22 @@ class ArticlesController extends Controller
 		return view('articles.create');
 	}
 	public function store(ArticleFormRequest $request)
-	{   $user = Auth::user();
+	{   
+		$request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $user = Auth::user();
+        $imageName='user'.$user->id.'_image'.time().'_'.request()->image->getClientOriginalName();
+		
 		$title=$request->input('title');
+		$description=$request->input('description');
+		$request->image->storeAs('images',$imageName);
 		$content=$request->input('content');
 		$user_id=$user->id;
 		Article::create([
 			'title'=>$title,
+			'description'=>$description,
+			'image'=>$imageName,
 			'content'=>$content,
 			'user_id'=>$user_id
 		]);
@@ -49,10 +60,27 @@ class ArticlesController extends Controller
 		return view ('articles.edit')->with('article',$article);*/
 	}
 	public function update($id,ArticleFormRequest $request)
-	{
+	{   
+		
+        $user = Auth::user();
+
 		$article=Article::find($id);
+
+		// dd(request()->image);
+        if($request->image != null){
+        	$request->validate([
+            	'img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        	]);
+        	$imageName='user'.$user->id.'_image'.time().'_'.request()->image->getClientOriginalName();
+        	$request->image->storeAs('images',$imageName);
+        }else{
+        	$imageName = $article->image;
+        }
+        
 		$article->update([
 			'title' =>$request->get('title'),
+			'description'=>$request->get('description'),
+			'image'=>$imageName,
 			'content'=>$request->get('content')
 		]);
 		return redirect()->route('home');

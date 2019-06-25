@@ -17,13 +17,13 @@ Them bai viet moi vao blog
 @section('body.content')
 <div class="container">
 	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3">
+		<div class="col-sm-10 col-sm-offset-1">
 			<h1>Add new article</h1>
 			<hr>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3">
+		<div class="col-sm-10 col-sm-offset-1">
 			@if (count($errors)>0)
 			<div class="alert alert-danger">
 				<strong>Canh bao!</strong>Co loi nhap lieu.<br><br>
@@ -53,7 +53,8 @@ Them bai viet moi vao blog
 {!! Form::open([
 	'route'=>['article.store'],
 	'method'=>'POST',
-	
+	'enctype'=>'multipart/form-data',
+	'class'=>'form-horizontal'
 	])
 	!!}
 

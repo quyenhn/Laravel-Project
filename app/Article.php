@@ -13,11 +13,17 @@ class Article extends Model
 
 	protected $fillable=[
 		'title',
+		'description',
+		'image',
 		'content',
 		'user_id'
 	];
 	/////////
 	public function user(){
        return $this->belongsTo('App\User','user_id','id');
+  	}
+  	public function comment()
+  	{
+  		return $this->hasMany('App\Comment','article_id','id');
   	}
 }

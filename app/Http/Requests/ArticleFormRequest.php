@@ -25,6 +25,7 @@ class ArticleFormRequest extends FormRequest
     {
         return [
         'title'=>'required',
+        'description'=>'required',
         'content'=>'required'
         ];
     }
