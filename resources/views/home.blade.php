@@ -35,7 +35,7 @@
             <div class="col-sm-8">
                 <h2>{{$a->title}}</h2>
                  <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $a->image }}" />
-                <p>{{$a->description}}</p> 
+                {{$a->description}} <br>
                 <small>Update at: {{$a->updated_at}}</small><br>
                 <p><a href="{{route('article.show',$a->id)}}">Read more</a></p>
             </div>

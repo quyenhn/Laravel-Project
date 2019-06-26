@@ -5,7 +5,7 @@
 </div>
 <div class="form-group">
 	{!! Form::label('description','Mo ta bai viet',['class'=>'control-label'])!!}
-	{!! Form::textarea('description', null ,['id'=>'description','class'=>'form-control','placeholder'=>'Dien vao day mo ta bai viet', 'required'=>'true'])!!}
+	{!! Form::textarea('description', null ,['rows'=>'3','id'=>'description','class'=>'form-control','placeholder'=>'Dien vao day mo ta bai viet', 'required'=>'true'])!!}
 </div>
 <div class="form-group">
 	<label>Hinh anh dai dien bai viet</label>

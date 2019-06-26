@@ -8,8 +8,8 @@ class Article extends Model
 {
 	protected $table='articles';
 
-	public $primaryKey='id';
-	public $timestamps=true;
+/*	public $primaryKey='id';
+	public $timestamps=true;*/
 
 	protected $fillable=[
 		'title',

@@ -73,7 +73,7 @@ Route::get('/{id}',[
 ]);
 });
 Route::get('/notowner',function(){
-  echo "Bạn không có quyền sửa/xóa bài viết của user khác!!!";
+  echo "Bạn không có quyền sửa/xóa nội dung của user khác!!!";
 })->name('notowner');
 
 // Route::get('/articles',[
@@ -146,3 +146,58 @@ Route::get('/', 'PagesController@index');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home'); 
 Route::get('logout', 'Auth\LoginController@logout');
+
+Route::group(['prefix'=>'/comment'],function(){
+	Route::post('/{article_id}',[	
+	'middleware'=>'auth',
+	'uses'=>'CommentController@store',
+	'as'=>'comment.store'
+]);
+
+Route::get('/{id}/edit',[
+	'middleware'=>'auth',
+	'middleware'=>'checkforowner',
+	'as'=>'comment.edit',
+	'uses'=>'CommentController@edit'
+]);
+    Route::put('/{id}',[
+	'middleware'=>'auth',
+	'middleware'=>'checkforowner',
+	'as'=>'comment.update',
+	'uses'=>'CommentController@update'
+]);
+
+Route::delete('/{id}',[
+	'middleware'=>'auth',
+	'middleware'=>'checkforowner',
+	'as'=>'comment.destroy',
+	'uses'=>'CommentController@destroy'
+]);
+});
+
+/*Route::post('comment/{article_id}',[	
+	'middleware'=>'auth',
+	
+	'uses'=>'CommentController@store',
+	'as'=>'comment.store'
+]);
+
+Route::get('comment/{id}/edit',[
+	'middleware'=>'auth',
+	'middleware'=>'checkforowner',
+	'as'=>'comment.edit',
+	'uses'=>'CommentController@edit'
+]);
+    Route::put('comment/{id}',[
+	'middleware'=>'auth',
+	'middleware'=>'checkforowner',
+	'as'=>'comment.update',
+	'uses'=>'CommentController@update'
+]);
+
+Route::delete('comment/{id}',[
+	'middleware'=>'auth',
+	'middleware'=>'checkforowner',
+	'as'=>'comment.destroy',
+	'uses'=>'CommentController@destroy'
+]);*/

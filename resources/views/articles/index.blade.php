@@ -15,7 +15,7 @@ Danh sach bai viet
             <div class="col-sm-8 col-sm-offset-2">
                 <h2>{{$a->title}}</h2>
                 <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $a->image }}" />
-                <p>{{$a->description}}</p> 
+                {{$a->description}} <br>
                 <small>Updated at: {{$a->updated_at}}, Author: {{$a->user->name}}</small>
                 <br>
                 <div style="font-size: 20px;"><a href="{{route('article.show',$a->id)}}">Read more</a></div>
