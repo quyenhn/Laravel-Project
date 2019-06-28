@@ -93,6 +93,39 @@
 
     </div>
 
+<div class="row justify-content-center"> 
+   @if(count($user_articles)>0)
+          <!-- <div class="row justify-content-center"> -->
+              <div class="col-sm-8 ">
+                  <i>Cac bai viet cua nguoi dung nay:</i>
+              </div>
+          <!-- </div> -->
+        @foreach ($user_articles as $a)
+        <div class="row justify-content-center">
+            <div class="col-sm-8">
+                <h2>{{$a->title}}</h2>
+                 <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $a->image }}" />
+                {{$a->description}} <br>
+                <small>Update at: {{$a->updated_at}}</small><br>
+                <p><a href="{{route('article.show',$a->id)}}">Read more</a></p>
+            </div>
+        </div>
+        @endforeach
+       @else
+       <!-- <div class="row justify-content-center"> -->
+<div class="col-sm-8 ">
+    <p>Sorry! The user no have any post in database!</p>
 </div>
+<!-- </div> -->
+    @endif   
+
+         <div class="row justify-content-center">
+             <div class="">
+                 {{$user_articles->links()}}
+             </div>
+         </div>
+</div>
+
+
 
 @endsection

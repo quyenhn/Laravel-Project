@@ -6,26 +6,21 @@ use Illuminate\Http\Request;
 use App\User;
 use Auth;
 class ProfileController extends Controller
-{
+{/*
  public function wall($profileId)
  {
   $user = User::find($profileId);
   return view('wall',compact('user',$user));
 }
-    /**
- * Follow the user.
- *
- * @param $profileId
- *
- */
-    /*public function followUser($profileId)
+  
+    public function followUser($profileId)
     {
       $user = User::find($profileId);
       if(! $user) {
-        
+
        return redirect()->back()->with('error', 'User does not exist.'); 
      }
-     
+
      $user->followers()->attach(auth()->user()->id);
      return redirect()->back()->with('success', 'Successfully followed the user.');}
 
@@ -33,7 +28,7 @@ class ProfileController extends Controller
      {
       $user = User::find($profileId);
       if(! $user) {
-        
+
        return redirect()->back()->with('error', 'User does not exist.'); 
      }
      $user->followers()->detach(auth()->user()->id);

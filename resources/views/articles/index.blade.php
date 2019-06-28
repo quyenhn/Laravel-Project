@@ -29,20 +29,22 @@ Danh sach bai viet
                   <i>Danh sach cac bai viet cua cac tac gia ban da theo doi:</i>
               </div>
           </div>
-        @foreach ($articles_following as $f)
+        @forelse ($articles_following as $f)
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
                 <h2>{{$f->title}}</h2>
                 <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $f->image }}" />
                  <small>Updated at: {{$f->updated_at}}, Author: {{$f->user->name}}</small>
                <p> {{$f->description}} </p>
-               
-                
                 <div style="font-size: 20px;"><a href="{{route('article.show',$f->id)}}">Read more</a></div>
             </div>
         </div>
+        @empty
+        <div class="col-sm-8 col-sm-offset-2">
+   <p> Bạn chưa follow user nào! </p>
+ </div>
         <hr>
-        @endforeach
+        @endforelse
         <!-- hien nhung bai viet cua nguoi dung follow -->
         @endif
   <!--   else

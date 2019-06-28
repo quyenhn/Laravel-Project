@@ -43,8 +43,9 @@ class HomeController extends Controller
     {
 
       $user = User::find($id);
+      $user_articles=$user->article()->orderBy('updated_at','desc')->paginate(3);
 
-      return view('user.usersView', compact('user'));
+      return view('user.usersView', compact('user','user_articles'));
 
     }
     public function ajaxRequest(Request $request){
