@@ -56,5 +56,28 @@ class User extends Authenticatable /*Model implements //Authenticatable
     {
         return $this->hasMany('App\Comment','user_id','id');
     }
+    /**
+ * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+ */
+    public function followers()
+{
+    return $this->belongsToMany(User::class, 'followers', 'leader_id', 'follower_id')->withTimestamps();
+}
+
+/**
+ * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+ */
+    public function followings()
+{
+    return $this->belongsToMany(User::class, 'followers', 'follower_id', 'leader_id')->withTimestamps();
+}
+        public function isFollowing(User $user)
+{
+    return  $this->followings()->where('leader_id', $user->id)->count();
+}
+        public function isFollowedBy(User $user)
+{
+    return  $this->followers()->where('follower_id', $user->id)->count();
+}
 }
 

@@ -18,7 +18,7 @@ class CreateArticlesTable extends Migration
             $table->bigIncrements('id');
 
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->string('image');
             $table->longText('content');
             $table->bigInteger('user_id')->unsigned();

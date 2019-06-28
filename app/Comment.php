@@ -5,11 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
-{   protected $fillable=[
-		'content'
-	
-	];
+{   
     protected $table='comments';
+    protected $fillable=[
+        'content'
+    
+    ];
     public function article()
     {
     	return $this->belongsTo('App\Article','article_id','id');

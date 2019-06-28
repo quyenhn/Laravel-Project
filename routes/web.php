@@ -19,11 +19,26 @@
 /////Route Group user profile///////
 Route::group(['prefix'=>'/profile'],function(){
     Route::get('/',[
-'middleware'=>'auth',
-'uses'=>'UserController@profile'
+	'middleware'=>'auth',
+	'uses'=>'UserController@profile'
 ]);
     Route::post('/', 'UserController@update_avatar');
 });
+/*Route::group(['prefix'=>'/user'],function(){
+    Route::get('{id}/following',[
+	// 'middleware'=>'auth',
+	'uses'=>'UserController@following'
+]);
+    
+});*/
+/*Route::get('wall/{profileId}','ProfileController@wall');
+Route::post('wall/{profileId}/follow', 'ProfileController@followUser')->name('user.follow');
+Route::post('wall/{profileId}/unfollow', 'ProfileController@unFollowUser')->name('user.unfollow');
+Route::get('show/{profileId}','ProfileController@show');*/
+
+Route::get('users', 'HomeController@users')->name('users');
+Route::get('user/{id}', 'HomeController@user')->name('user.view');
+Route::post('ajaxRequest', 'HomeController@ajaxRequest')->name('ajaxRequest');
 
 /*Route::get('profile',[
 'middleware'=>'auth',

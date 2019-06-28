@@ -32,4 +32,5 @@ class UserController extends Controller
             ->with('success','You have successfully upload image.');
 
     }
+            
 }

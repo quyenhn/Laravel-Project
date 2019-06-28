@@ -35,6 +35,7 @@ Chi tiet bai viet
                 <h2>{{$article->title}}</h2>
                  <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $article->image }}" />
                 <small>Create at: {{$article->created_at}}, Update at: {{$article->updated_at}}, Author: {{$article->user->name}}</small>
+                <a style="float: right;" href="{{route('user.view',$article->user->id)}}">Follow at author's profile</a></li>
                 <br><br>
                <?php echo $article->content; ?>
             </div>
@@ -67,7 +68,7 @@ Chi tiet bai viet
            </div>
            <p><?php echo $cm->content ?></p>
 
-            @if (\Auth::check() && $user->id==$cm->user_id)
+            @if (\Auth::check() && $user->id==$cm->user_id)<!-- ||(\Auth::check() && $article->user_id==$user->id)) -->
         <div class="row">
           <div class="col-sm-8 ">
             <a href="{{ route('comment.edit', $cm->id) }}" class="btn btn-success">Sửa comment</a>

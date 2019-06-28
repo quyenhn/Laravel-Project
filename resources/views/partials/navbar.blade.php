@@ -24,7 +24,9 @@ $user = Auth::user();
                 <ul class="nav navbar-nav">
                     @if(\Auth::check())
                     <li><a href="{{route('article.create')}}">Create new article</a></li>
-                    @endif
+                    
+                      <li><a href="{{route('users')}}">List all user</a></li>
+                      @endif
                 </ul>
                 <!-- <form class="navbar-form navbar-left" role="search">
                     <div class="form-group">

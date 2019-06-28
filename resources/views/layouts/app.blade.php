@@ -45,6 +45,8 @@ $user = Auth::user();
                         
                         @if(\Auth::check())
                         <li><a href="{{route('article.create')}}">Create new article</a></li>
+
+                         <li style="padding:0 15px;"><a href="{{route('users')}}">List all user</a></li>
                         @endif
                     
                     </ul>

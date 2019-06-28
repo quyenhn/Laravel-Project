@@ -12,8 +12,20 @@ use App\Http\Requests\ArticleFormRequest;
 class ArticlesController extends Controller
 {
 	public function index()
-	{   $articles=Article::orderBy('updated_at','desc')->paginate(3);   
-     return view('articles.index')->with('articles', $articles);
+	{   
+		if (!\Auth::check()) {
+			$articles=Article::orderBy('updated_at','desc')->paginate(3); 
+			return view('articles.index')->with('articles', $articles);
+		}
+		else
+	    { 
+          $user_login=User::find(Auth::user()->id);
+		  $followings = $user_login->followings;
+		  //dd($followings );
+		   $articles_following=Article::whereIn('user_id',$followings->pluck('id'))->orderBy('updated_at','desc')->paginate(3);
+		//   dd($articles_following);	
+        return view('articles.index')->with('articles_following', $articles_following);
+        }
 	/*return view('articles.index',compact('articles')); */
 	}
 
@@ -88,7 +100,7 @@ class ArticlesController extends Controller
 	public function destroy($id)
 	{
 		$article=Article::find($id);
-		Comment::where('article_id',$id)->delete();
+		//Comment::where('article_id',$id)->delete();
 		//$article->comment->delete();
 		$article->delete();
 		return redirect()->route('home');
