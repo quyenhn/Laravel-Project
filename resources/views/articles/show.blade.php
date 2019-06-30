@@ -34,7 +34,7 @@ Chi tiet bai viet
             <div class="col-sm-8 col-sm-offset-2">
                 <h2>{{$article->title}}</h2>
                  <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $article->image }}" />
-                <small>Create at: {{$article->created_at}}, Update at: {{$article->updated_at}}, Author: {{$article->user->name}}</small>
+                <small>Create at: {{$article->created_at}}, Update at: {{$article->updated_at}}, Author: {{$article->user->name}}, {{count($article->comment)}} comments</small>
                 <a style="float: right;" href="{{route('user.view',$article->user->id)}}">Follow at author's profile</a></li>
                 <br><br>
                <?php echo $article->content; ?>

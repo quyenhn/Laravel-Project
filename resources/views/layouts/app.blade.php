@@ -99,6 +99,6 @@ $user = Auth::user();
             @yield('content')
         </main>
     </div>
-     <!-- @include('partials.footer') -->
+     @include('partials.footer')
 </body>
 </html>

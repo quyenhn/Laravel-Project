@@ -97,7 +97,7 @@
    @if(count($user_articles)>0)
           <!-- <div class="row justify-content-center"> -->
               <div class="col-sm-8 ">
-                  <i>Cac bai viet cua nguoi dung nay:</i>
+                  <i>Các bài viết của người dùng này: Tìm thấy {{$user_articles->total()}} bài viết!</i>
               </div>
           <!-- </div> -->
         @foreach ($user_articles as $a)
@@ -107,7 +107,12 @@
                  <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $a->image }}" />
                 {{$a->description}} <br>
                 <small>Update at: {{$a->updated_at}}</small><br>
-                <p><a href="{{route('article.show',$a->id)}}">Read more</a></p>
+                <!-- <p><a href="{{route('article.show',$a->id)}}">Read more</a></p> -->
+                <div style="font-size: 20px;">
+                  <a href="{{route('article.show',$a->id)}}" style="text-decoration: underline;">Read more</a>
+                  &nbsp;
+                  <a href="{{route('article.show',$a->id)}}"  style="text-decoration: underline;">{{count($a->comment)}} comments</a>
+                </div>
             </div>
         </div>
         @endforeach
