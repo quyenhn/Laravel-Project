@@ -17,7 +17,7 @@ Chinh sua noi dung
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">
 			<h1>Edit comment</h1>
-			<hr>
+		
 		</div>
 	</div>
 	<div class="row">

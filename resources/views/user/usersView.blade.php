@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('head.title')
+Tuong ca nhan cua user
+@endsection
 
 @section('content')
 
@@ -96,13 +98,14 @@
 <div class="row justify-content-center"> 
    @if(count($user_articles)>0)
           <!-- <div class="row justify-content-center"> -->
-              <div class="col-sm-8 ">
+            
+              <div class="col-sm-10" style="margin-top: 20px">
                   <i>Các bài viết của người dùng này: Tìm thấy {{$user_articles->total()}} bài viết!</i>
               </div>
           <!-- </div> -->
         @foreach ($user_articles as $a)
         <div class="row justify-content-center">
-            <div class="col-sm-8">
+            <div class="col-sm-10">
                 <h2>{{$a->title}}</h2>
                  <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $a->image }}" />
                 {{$a->description}} <br>
@@ -118,7 +121,7 @@
         @endforeach
        @else
        <!-- <div class="row justify-content-center"> -->
-<div class="col-sm-8 ">
+<div class="col-sm-10 ">
     <p>Sorry! The user no have any post in database!</p>
 </div>
 <!-- </div> -->

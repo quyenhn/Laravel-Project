@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('head.title')
+Trang ca nhan
+@endsection
 
 @section('content')
 <!-- <div class="container">
@@ -26,13 +29,13 @@
 <div class="container">
    @if(count($articles)>0)
           <div class="row justify-content-center">
-              <div class="col-sm-8">
+              <div class="col-sm-10">
                   <i>Các bài viết bạn đã tạo: Tìm thấy {{$articles->total()}} bài viết!</i>
               </div>
           </div>
         @foreach ($articles as $a)
         <div class="row justify-content-center">
-            <div class="col-sm-8">
+            <div class="col-sm-10">
                 <h2>{{$a->title}}</h2>
                  <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $a->image }}" />
                 {{$a->description}} <br>
@@ -44,10 +47,11 @@
                 </div>
             </div>
         </div>
+        <hr>
         @endforeach
        @else
        <div class="row justify-content-center">
-<div class="col-sm-6 ">
+<div class="col-sm-10">
     <p>Sorry! You no have any post in database!</p>
 </div>
 </div>

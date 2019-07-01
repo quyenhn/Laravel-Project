@@ -36,6 +36,9 @@ class ArticlesController extends Controller
 		
       $article = Article::find($id);
   //  $article=  DB::table('articles')->select('articles.id','title','content','articles.created_at','articles.updated_at','user_id','name')->join('users','users.id','=','articles.user_id')->where('articles.id',$id)->get() ;
+      if ($article==null) {
+      	return view ('errors.404');
+      }else
 	return view ('articles.show')->with('article',$article);
 	}
 	public function create()

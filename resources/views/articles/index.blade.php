@@ -7,13 +7,13 @@ Danh sach bai viet
     <!-- if(count($articles)>0) -->
        @if (!\Auth::check())
           <div class="row ">
-              <div class="col-sm-8 col-sm-offset-2">
+              <div class="col-sm-10 col-sm-offset-1">
                   <i>Danh sach toan bo cac bai viet nguoi dung da tao: Tìm thấy {{$articles->total()}} bài viết</i>
               </div>
           </div>
         @foreach ($articles as $a)
         <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
+            <div class="col-sm-10 col-sm-offset-1">
                 <h2>{{$a->title}}</h2>
                 <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $a->image }}" />
                  <small>Updated at: {{$a->updated_at}}, Author: {{$a->user->name}}</small>
@@ -29,13 +29,13 @@ Danh sach bai viet
         @endforeach
         @else 
         <div class="row ">
-              <div class="col-sm-8 col-sm-offset-2">
+              <div class="col-sm-10 col-sm-offset-1">
                   <i>Danh sach cac bai viet cua cac tac gia ban da theo doi: Tìm thấy {{$articles_following->total()}} bài viết</i>
               </div>
           </div>
         @forelse ($articles_following as $f)
         <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
+            <div class="col-sm-10 col-sm-offset-1">
                 <h2>{{$f->title}}</h2>
                 <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $f->image }}" />
                  <small>Updated at: {{$f->updated_at}}, Author: {{$f->user->name}}</small>
@@ -47,8 +47,9 @@ Danh sach bai viet
                 </div>
             </div>
         </div>
+        <hr>
         @empty
-        <div class="col-sm-8 col-sm-offset-2">
+        <div class="col-sm-10 col-sm-offset-1 text-center">
    <b> Bạn chưa follow user nào hoặc người bạn theo dõi chưa đăng bài viết! </b>
  </div>
         

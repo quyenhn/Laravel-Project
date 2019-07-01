@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('head.title')
+Danh sach user
+@endsection
 
 @section('content')
 

@@ -4,14 +4,26 @@
 }
 #footer .col-sm-6{
 	padding-top: 35px;
-    border-top: 1px solid #dcdcdc;
+	border-top: 1px solid #dcdcdc;
 }
 li>a{
 	color: #777;
-	 text-decoration: none;
+	text-decoration: none;
 }
 a:hover {
-    color: #333;
-    background-color: transparent;
-    text-decoration: none;
+	color: #333;
+	background-color: transparent;
+	text-decoration: none;
+}
+body{
+	background-color: #e3e3e3;
+	background-image: url('//4.bp.blogspot.com/-kDHDyPIzCEA/VuEzaNMg5eI/AAAAAAAAAW4/O18b12uYZ0M/s000/bg.png');
+	background-repeat: repeat;
+	background-position: top left;
+	background-attachment: fixed;
+}
+.col-sm-10{
+	background: #f2f2f2;
+	margin-bottom: 20px;
+	padding: 20px 70px 20px;
 }

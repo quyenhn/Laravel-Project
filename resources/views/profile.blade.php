@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('head.title')
+Cap nhat avatar ca nhan
+@endsection
 
 @section('content')
 

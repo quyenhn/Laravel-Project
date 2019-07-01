@@ -16,7 +16,7 @@ $user = Auth::user();
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ route('article.index') }}">List Blog</a>
+                <a class="navbar-brand" href="{{ route('article.index') }}">QBlogger.com</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->

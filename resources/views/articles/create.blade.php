@@ -19,7 +19,7 @@ Them bai viet moi vao blog
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">
 			<h1>Add new article</h1>
-			<hr>
+			
 		</div>
 	</div>
 	<div class="row">

@@ -4,7 +4,7 @@
 
         <div class="col-2 profile-box border p-1 rounded text-center bg-light mr-4 mt-3">
 
-            <img src="/storage/avatars/{{ $user->avatar }}" class="w-100 mb-1">
+            <img src="/storage/avatars/{{ $user->avatar }}" class="w-100 mb-1" style="height: 180px;">
 
             <h5 class="m-0"><a href="{{ route('user.view', $user->id) }}"><strong>{{ $user->name }}</strong></a></h5>
 

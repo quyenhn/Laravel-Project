@@ -171,20 +171,20 @@ Route::group(['prefix'=>'/comment'],function(){
 
 Route::get('/{id}/edit',[
 	'middleware'=>'auth',
-	'middleware'=>'checkforowner',
+	'middleware'=>'checkforcomment',
 	'as'=>'comment.edit',
 	'uses'=>'CommentController@edit'
 ]);
     Route::put('/{id}',[
 	'middleware'=>'auth',
-	'middleware'=>'checkforowner',
+	'middleware'=>'checkforcomment',
 	'as'=>'comment.update',
 	'uses'=>'CommentController@update'
 ]);
 
 Route::delete('/{id}',[
 	'middleware'=>'auth',
-	'middleware'=>'checkforowner',
+	'middleware'=>'checkforcomment',
 	'as'=>'comment.destroy',
 	'uses'=>'CommentController@destroy'
 ]);

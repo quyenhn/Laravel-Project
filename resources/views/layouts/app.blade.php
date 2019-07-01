@@ -12,7 +12,7 @@ $user = Auth::user();
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Trang cá nhân  </title>
+    <title> @yield('head.title') </title>
 
     <!-- Scripts -->
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
