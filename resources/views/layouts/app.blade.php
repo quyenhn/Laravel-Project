@@ -1,5 +1,4 @@
 <?php
-
 $user = Auth::user();
 ?>
 
@@ -14,19 +13,16 @@ $user = Auth::user();
 
     <title> @yield('head.title') </title>
 
-    <!-- Scripts -->
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <!--   <script src="{{ asset('js/app.js') }}" defer></script>  -->
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{asset('css/bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"></head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('head.css')
+
 </head>
 <body>
     <div id="app">
@@ -45,8 +41,7 @@ $user = Auth::user();
                         
                         @if(\Auth::check())
                         <li><a href="{{route('article.create')}}">Create new article</a></li>
-
-                         <li style="padding:0 15px;"><a href="{{route('users')}}">List all user</a></li>
+                        <li style="padding:0 15px;"><a href="{{route('users')}}">List all users</a></li>
                         @endif
                     
                     </ul>
@@ -66,7 +61,7 @@ $user = Auth::user();
                         @else
                             <li class="nav-item dropdown">
                                 
-                                <li><img  src="/storage/avatars/{{ $user->avatar }}" style=" border-radius: 50%;width:auto;height: 50px;" alt="avatar"/></li>
+                            <li><img  src="/storage/avatars/{{ $user->avatar }}" style=" border-radius: 50%;width:auto;height: 50px;" alt="avatar"/></li>
 
                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -74,8 +69,12 @@ $user = Auth::user();
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
+                                    <a class="dropdown-item" href="/home">
+                                        News feed
+                                    </a>
+
                                     <a class="dropdown-item" href="/profile">
-                                        User Profile
+                                        Change avatar
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -97,8 +96,18 @@ $user = Auth::user();
 
         <main class="py-4">
             @yield('content')
+            <div class="ajax-load text-center" style="display:none">
+              <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More</p>
+            </div>
         </main>
     </div>
-     @include('partials.footer')
+    @include('partials.footer')
+    <!-- Scripts -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap4.min.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+    <!-- <script src="{{ asset('js/app.js') }}" defer></script>  -->
+    @yield('body.js')
 </body>
 </html>

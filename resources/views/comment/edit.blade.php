@@ -1,7 +1,7 @@
-@extends ('layouts.master')
+@extends ('layouts.app')
 
 @section('head.title')
-Chinh sua noi dung
+Chinh sua noi dung comment
 @stop
 @section('head.css')
 <script src="https://cdn.ckeditor.com/4.11.4/full-all/ckeditor.js"></script>
@@ -12,15 +12,14 @@ Chinh sua noi dung
      CKEDITOR.replace( 'editor' );
 </script>
 @stop
-@section('body.content')
+@section('content')
 <div class="container">
-	<div class="row">
+	<div class="row justify-content-center">
 		<div class="col-sm-10 col-sm-offset-1">
-			<h1>Edit comment</h1>
-		
+			<h2>Edit comment</h2>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row justify-content-center">
 		<div class="col-sm-10 col-sm-offset-1">
 			@if (count($errors)>0)
 			<div class="alert alert-danger">

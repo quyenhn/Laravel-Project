@@ -16,14 +16,16 @@ Danh sach user
 
             <div class="card">
 
-                <div class="card-header">List of Users</div>
+                <div class="card-header">List of Users, Total: {{$users->total()}} users</div>
 
 
                 <div class="card-body">
 
-                    <div class="row pl-5">
+                    <div class="row pl-5" id="post-data">
 
-                        @include('user.userList', ['users'=>$users])
+                       {{-- @include('user.userList', ['users'=>$users]) --}}
+
+                       @include('user.data')
 
                     </div>
 
@@ -38,3 +40,7 @@ Danh sach user
 </div>
 
 @endsection
+
+@section('body.js')
+<script src="{{ asset('js/app.js') }}"></script> 
+@stop

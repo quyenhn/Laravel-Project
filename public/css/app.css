@@ -1,5 +1,5 @@
 #footer{
-	margin-top: 50px;
+	margin-top: 0px;
 	padding-bottom: 35px;
 }
 #footer .col-sm-6{
@@ -26,4 +26,10 @@ body{
 	background: #f2f2f2;
 	margin-bottom: 20px;
 	padding: 20px 70px 20px;
+}
+.ajax-load
+{
+	background: #e1e1e1;
+	padding: 10px 0px;
+	width: 100%;
 }

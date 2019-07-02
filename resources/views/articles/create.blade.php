@@ -1,7 +1,7 @@
-@extends ('layouts.master')
+@extends ('layouts.app')
 
 @section('head.title')
-Them bai viet moi vao blog
+Thêm bài viết mới vào blog
 @stop
 
 @section('head.css')
@@ -14,19 +14,18 @@ Them bai viet moi vao blog
 </script>
 @stop
 
-@section('body.content')
+@section('content')
 <div class="container">
-	<div class="row">
+	<div class="row justify-content-center">
 		<div class="col-sm-10 col-sm-offset-1">
-			<h1>Add new article</h1>
-			
+			<h2>Add new article</h2>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row justify-content-center">
 		<div class="col-sm-10 col-sm-offset-1">
 			@if (count($errors)>0)
 			<div class="alert alert-danger">
-				<strong>Canh bao!</strong>Co loi nhap lieu.<br><br>
+				<strong>Cảnh báo!</strong>Có lỗi xảy ra.<br><br>
 				<ul>
 					@foreach ($errors->all() as $error)
 					<li>{{$error}}</li>

@@ -24,44 +24,50 @@ Trang ca nhan
             </div>
         </div>
     </div>
-</div> -->
+  </div> -->
 
-<div class="container">
+  <div class="container">
    @if(count($articles)>0)
-          <div class="row justify-content-center">
-              <div class="col-sm-10">
-                  <i>Các bài viết bạn đã tạo: Tìm thấy {{$articles->total()}} bài viết!</i>
-              </div>
-          </div>
-        @foreach ($articles as $a)
-        <div class="row justify-content-center">
-            <div class="col-sm-10">
-                <h2>{{$a->title}}</h2>
-                 <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $a->image }}" />
-                {{$a->description}} <br>
-                <small>Update at: {{$a->updated_at}}</small><br>
-                <div style="font-size: 20px;"> 
-                <a href="{{route('article.show',$a->id)}}" style="text-decoration: underline;">Read more</a>
-                &nbsp;
-                <a href="{{route('article.show',$a->id)}}" style="text-decoration: underline;">{{count($a->comment)}} comments</a>
-                </div>
-            </div>
-        </div>
-        <hr>
-        @endforeach
-       @else
-       <div class="row justify-content-center">
-<div class="col-sm-10">
-    <p>Sorry! You no have any post in database!</p>
-</div>
-</div>
-    @endif   
+   <div class="row justify-content-center">
+    <div class="col-sm-10">
+      <i>Các bài viết bạn đã tạo & bai viet cua nguoi ma ban follow: Tìm thấy {{$articles->total()}} bài viết!</i>
+    </div>
+  </div>
+  
+  <div class="row justify-content-center" id="post-data">
+    {{--@foreach ($articles as $a)
+      <div class="col-sm-10">
+      <h2>{{$a->title}}</h2>
+      <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $a->image }}" />
+      
+      <small>Update at: {{$a->updated_at}}, Author: {{$a->user->name}}</small><br>
+      {{$a->description}} <br>
+      <div style="font-size: 20px;"> 
+        <a href="{{route('article.show',$a->id)}}" style="text-decoration: underline;">Read more</a>
+        &nbsp;
+        <a href="{{route('article.show',$a->id)}}" style="text-decoration: underline;">{{count($a->comment)}} comments</a>
+      </div>
+    </div>
+    @endforeach--}}
+    @include('articles.data')
+  </div>
+  
+  @else
+  <div class="row justify-content-center">
+    <div class="col-sm-10">
+      <p>Sorry! You no have any post in database!</p>
+    </div>
+  </div>
+  @endif   
 
-         <div class="row justify-content-center">
-             <div class="">
-                 {{$articles->links()}}
-             </div>
-         </div>
+ {{-- <div class="row justify-content-center">
+   <div class="">
+     {{$articles->links()}}
+   </div>
+ </div> --}}
 </div>
-
 @endsection
+
+@section('body.js')
+<script type="text/javascript" src="js/app.js"></script>
+@stop

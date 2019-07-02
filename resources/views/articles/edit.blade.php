@@ -1,4 +1,4 @@
-@extends ('layouts.master')
+@extends ('layouts.app')
 
 @section('head.title')
 Chinh sua noi dung
@@ -9,18 +9,17 @@ Chinh sua noi dung
 
 @section('body.js')
 <script>
-     CKEDITOR.replace( 'editor' );
+	CKEDITOR.replace( 'editor' );
 </script>
 @stop
-@section('body.content')
+@section('content')
 <div class="container">
-	<div class="row">
+	<div class="row justify-content-center">
 		<div class="col-sm-10 col-sm-offset-1">
-			<h1>Edit article</h1>
-			
+			<h2>Edit article</h2>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row justify-content-center">
 		<div class="col-sm-10 col-sm-offset-1">
 			@if (count($errors)>0)
 			<div class="alert alert-danger">
@@ -47,7 +46,7 @@ Chinh sua noi dung
 		 			<button class="btn btn-primary">Them bai viet</button> 
 		 		</div>
 		 	</form> -->
-            
+
 		 	{!! Form::model($article,[
 		 		'route'=>['article.update',$article->id],
 		 		'method'=>'PUT',
@@ -57,8 +56,8 @@ Chinh sua noi dung
 		 		!!}
 		 		@include('articles._form',['button_name'=>'Update'])
 		 		{!! Form::close()!!}
-            
-		 	</div>
+
 		 </div>
-		</div>
-		@stop
+	 </div>
+</div>
+@stop
