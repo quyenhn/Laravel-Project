@@ -8,6 +8,8 @@ use Auth;
 use App\User;
 use App\Follow;
 
+use DataTables;
+use Illuminate\Support\Str;
 class HomeController extends Controller
 {
     /**
@@ -45,22 +47,18 @@ class HomeController extends Controller
       return view('home')->with('articles',$articles); 
       // redirect('/articles');
     }
-    //////////
+
     public function users(Request $request)
     {
-      $users=User::paginate(10);
-
+      $users=User::paginate(15);
       if ($request->ajax()) 
       {
-
-        $view = view('user.data',compact('users'))->render();
-
+        $view = view('user.userList',compact('users'))->render();
             return response()->json(['html'=>$view]);
-
       }
-
       return view('user.users',compact('users'));
     }
+
     public function user($id, Request $request)
     {
 
@@ -79,6 +77,7 @@ class HomeController extends Controller
       return view('user.usersView', compact('user','articles'));
 
     }
+
     public function ajaxRequest(Request $request)
     {
       $user = User::find($request->user_id);
@@ -99,5 +98,4 @@ class HomeController extends Controller
       return response()->json(['status'=>$status,'count'=>$count, 'auth_id' => auth()->user()->id]);
 
     }
-
-  }
+}

@@ -158,6 +158,12 @@ Route::get('/notowner',function(){
 // Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 Route::get('/', 'PagesController@index');
+
+Route::match(['get'], 'search_user',[
+        'as' => 'search_user',
+        'uses' => 'PagesController@search_user' ]);
+// Route::post('search_user','PagesController@search_user');
+
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home'); 
 Route::get('logout', 'Auth\LoginController@logout');

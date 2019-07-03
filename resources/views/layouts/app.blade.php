@@ -101,7 +101,7 @@ $user = Auth::user();
             </div>
         </main>
     </div>
-    @include('partials.footer')
+    @include('partials.footer') 
     <!-- Scripts -->
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap4.min.js"></script>

@@ -1,13 +1,10 @@
 @extends('layouts.app')
+
 @section('head.title')
 Tuong ca nhan cua user
 @endsection
 
 @section('content')
-
-<script src="{{ asset('js/custom.js') }}" defer></script>
-
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -100,4 +97,5 @@ Tuong ca nhan cua user
 
 @section('body.js')
 <script src="{{ asset('js/app.js') }}"></script> 
+<script src="{{ asset('js/custom.js') }}" defer></script>
 @endsection
