@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Article;
 use Illuminate\Http\Request;
 use App\User;
 class PagesController extends Controller
@@ -13,9 +12,7 @@ class PagesController extends Controller
     public function search_user(Request $request)
     {
     	$keyword=$request->keyword;// \Request::get('keyword');
-        if ($keyword==null) {
-            return back();
-        }
+        if ($keyword==null) return back();
     	$users=User::where('name','like',"%$keyword%")->get();//->paginate(15);
     	/*if ($request->ajax()) 
       	{ 
@@ -24,7 +21,7 @@ class PagesController extends Controller
         $view = view('user.data',compact('users'))->render();
         return response()->json(['html'=>$view]);
       	}*/
-    	return view('user.search', compact('users','keyword'));
+    	return view('user.search', ['users'=>$users, 'keyword'=>$keyword]);
     }
     
 }
