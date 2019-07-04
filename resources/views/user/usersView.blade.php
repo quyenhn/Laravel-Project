@@ -81,18 +81,18 @@ Tuong ca nhan cua user
           </div>
     @else
 <div class="row justify-content-center"> 
-  <div class="col-sm-10 ">
-    <p>Sorry! The user no have any post in database!</p>
+  <div class="col-sm-10" style="margin-top: 20px">
+    <i>User này chưa đăng tải bài viết nào!</i>
   </div>
 </div>
     @endif   
 
-    {{--  <div class="row justify-content-center">
-     <div class="">
+    {{-- <div class="row justify-content-center">
+           <div class="">
        {{$user_articles->links()}}
-     </div>
+           </div>
          </div> --}}
-</div>         
+</div>     <!-- end container -->    
 @endsection
 
 @section('body.js')

@@ -25,15 +25,15 @@ Chi tiet bai viet
    <div class="col-sm-10">
      <a href="{{url('/home')}}" class="btn btn-link">
        <i class="fas fa-chevron-left"></i>
-       Back to home user blog
+       Back to your news feed
      </a>
    </div>
  </div>
  
  <div class="row justify-content-center">
   <div class="col-sm-10">
-    <h2>{{$article->title}}</h2>
-    <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $article->image }}" />
+    <h2><strong>{{$article->title}}</strong></h2>
+    <img style="display: block;width: 100%;height: auto;" src="/storage/images/{{ $article->image }}" />
     <small>Create at: {{$article->created_at}}, Update at: {{$article->updated_at}}, Author: {{$article->user->name}}, {{count($article->comment)}} comments</small>
     <a style="float: right;" href="{{route('user.view',$article->user->id)}}">Follow at author's profile</a>
     <br><br>
@@ -48,33 +48,34 @@ Chi tiet bai viet
       ]) !!}
       <button class="btn btn-danger">Xóa bài viết</button>
       {!! Form::close() !!}
-    @endif
+      @endif
     </div>
   </div>
 
- <div class="row justify-content-center">
+  <div class="row justify-content-center">
    <div class="col-sm-10 ">
-       <h4>Comments...</h4>
-    @foreach($article->comment as $cm)
-    <hr>
+     <h4>Comments...</h4>
+     @foreach($article->comment as $cm)
+     <hr>
      <img src="/storage/avatars/{{ $cm->user->avatar }}" style="width:auto;height: 50px;" alt="avatar" />
      <span>{{$cm->user->name}}</span><br>
      <small>{{$cm->updated_at}}</small>
      <span><?php echo $cm->content ?></span>
 
-    @if (\Auth::check() && $user->id==$cm->user_id)<!-- ||(\Auth::check() && $article->user_id==$user->id)) -->
-      <a href="{{ route('comment.edit', $cm->id) }}" class="btn btn-success">Sửa comment</a>
-      {!! Form::open([
-        'route'=>['comment.destroy',$cm->id],
-        'method'=>'DELETE',
-        'style'=>'display:inline'
-        ]) !!}
+     @if (\Auth::check() && $user->id==$cm->user_id)<!-- ||(\Auth::check() && $article->user_id==$user->id)) -->
+     <a href="{{ route('comment.edit', $cm->id) }}" class="btn btn-success">Sửa comment</a>
+     {!! Form::open([
+      'route'=>['comment.destroy',$cm->id],
+      'method'=>'DELETE',
+      'style'=>'display:inline'
+      ]) !!}
       <button class="btn btn-warning">Xóa comment</button>
       {!! Form::close() !!}
-    @endif
-    @endforeach
-      </div>
+      @endif
+      @endforeach
+    </div>
   </div>
+
   @if (\Auth::check()) 
   <div class="row justify-content-center">
     <div class="col-sm-10">         
@@ -97,8 +98,8 @@ Chi tiet bai viet
       <div class="form-group">
         {!! Form::submit('Add comment',['class'=>'btn btn-success'])!!}
       </div>
-    {!! Form::close() !!}
-      </div>
+      {!! Form::close() !!}
+    </div>
   </div>
   @endif
 </div>

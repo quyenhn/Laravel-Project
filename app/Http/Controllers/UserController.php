@@ -9,7 +9,7 @@ class UserController extends Controller
     public function profile()
     {
         $user = Auth::user();
-        return view('profile',compact('user',$user));
+        return view('user.profile',compact('user',$user));
     }
 
     public function update_avatar(Request $request)
