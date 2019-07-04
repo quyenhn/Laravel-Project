@@ -12,11 +12,11 @@ class PagesController extends Controller
     }
     public function search_user(Request $request)
     {
-    	$keyword=$request->get('keyword');// \Request::get('keyword');
+    	$keyword=$request->keyword;// \Request::get('keyword');
         if ($keyword==null) {
             return back();
         }
-    	$users=User::where('name','like','%'.$keyword.'%')->get();//->paginate(15);
+    	$users=User::where('name','like',"%$keyword%")->get();//->paginate(15);
     	/*if ($request->ajax()) 
       	{ 
       		\Log::info('-----KeyWord -------' . $keyword);
@@ -24,7 +24,7 @@ class PagesController extends Controller
         $view = view('user.data',compact('users'))->render();
         return response()->json(['html'=>$view]);
       	}*/
-    	return view('user.search', ['keyword'=>$keyword,'users'=>$users]);
+    	return view('user.search', compact('users','keyword'));
     }
     
 }

@@ -18,7 +18,7 @@ Danh sach user
             <div class="col-md-6 form-inline justify-content-end">
               <label>Search:&nbsp; 
                 <form action="{{route('search_user')}}" method="get" role="search">
-                  <input type="text" id="keyword" name="keyword" class="form-control" placeholder="Type user name..."/>
+                  <input type="text" name="keyword" class="form-control" placeholder="Type user name..."/>
                   <button class="icon" type="submit"><i class="fa fa-search"></i></button>
                 </form>
               </label>
