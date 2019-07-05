@@ -17,10 +17,10 @@ Danh sach user
             <div class="col-md-6 form-inline justify-content-end">
               <label>Search:&nbsp; 
                 <form action="/search_user" method="get" role="search">
-                <div class="input-group">
-                  <input type="text" name="keyword" class="form-control" placeholder="Type user name..."/>
-                  <button class="icon" type="submit"><i class="fa fa-search"></i></button>
-                </div>
+                  <div class="input-group">
+                    <input type="text" name="keyword" value="{{ old('keyword') }}" class="form-control" placeholder="Type user name..."/>
+                    <button class="icon" type="submit"><i class="fa fa-search"></i></button>
+                  </div>
                 </form>
               </label>
             </div>
@@ -29,7 +29,6 @@ Danh sach user
         <div class="card-body">
           <div class="row pl-5" id="post-data">
            {{-- @include('user.userList', ['users'=>$users]) --}}
-
            @include('user.userList') 
          </div>
        </div>

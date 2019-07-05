@@ -18,11 +18,12 @@
 
 /////Route Group user profile///////
 Route::group(['prefix'=>'/profile'],function(){
-    Route::get('/',[
-	'middleware'=>'auth',
-	'uses'=>'UserController@profile'
-]);
-    Route::post('/', 'UserController@update_avatar');
+	Route::get('/',[
+		'as'=>'profile',
+		'middleware'=>'auth',
+		'uses'=>'UserController@profile'
+	]);
+	Route::post('/', 'UserController@update_avatar');
 });
 /*Route::group(['prefix'=>'/user'],function(){
     Route::get('{id}/following',[
@@ -40,6 +41,7 @@ Route::get('users', 'HomeController@users')->name('users');
 Route::get('search_user','HomeController@search')->name('user.search');
 Route::get('user/{id}', 'HomeController@user')->name('user.view');
 Route::post('ajaxRequest', 'HomeController@ajaxRequest')->name('ajaxRequest');
+Route::get('/news_feed', 'HomeController@index')->name('news_feed'); 
 
 /*Route::get('profile',[
 'middleware'=>'auth',
@@ -49,47 +51,47 @@ Route::post('profile', 'UserController@update_avatar');*/
 
 /////Route Group articles//////
 Route::group(['prefix'=>'/articles'],function(){
-    Route::get('',[
-	'as'=>'article.index',
-	'uses'=>'ArticlesController@index'
-]);
-    Route::get('/create',[
-	'middleware'=>'auth',
-	'as'=>'article.create',
-	'uses'=>'ArticlesController@create'
-]);
-    Route::post('',[
-	'middleware'=>'auth',
-	'as'=>'article.store',
-	'uses'=>'ArticlesController@store'
-]);
-    Route::get('/{id}/edit',[
-	'middleware'=>'auth',
-	'middleware'=>'checkforowner',
-	'as'=>'article.edit',
-	'uses'=>'ArticlesController@edit'
-]);
-    Route::put('/{id}',[
-	'middleware'=>'auth',
-	'middleware'=>'checkforowner',
-	'as'=>'article.update',
-	'uses'=>'ArticlesController@update'
-]);
+	Route::get('',[
+		'as'=>'article.index',
+		'uses'=>'ArticlesController@index'
+	]);
+	Route::get('/create',[
+		'middleware'=>'auth',
+		'as'=>'article.create',
+		'uses'=>'ArticlesController@create'
+	]);
+	Route::post('',[
+		'middleware'=>'auth',
+		'as'=>'article.store',
+		'uses'=>'ArticlesController@store'
+	]);
+	Route::get('/{id}/edit',[
+		'middleware'=>'auth',
+		'middleware'=>'checkforowner',
+		'as'=>'article.edit',
+		'uses'=>'ArticlesController@edit'
+	]);
+	Route::put('/{id}',[
+		'middleware'=>'auth',
+		'middleware'=>'checkforowner',
+		'as'=>'article.update',
+		'uses'=>'ArticlesController@update'
+	]);
 
-Route::delete('/{id}',[
-	'middleware'=>'auth',
-	'middleware'=>'checkforowner',
-	'as'=>'article.destroy',
-	'uses'=>'ArticlesController@destroy'
-]);
+	Route::delete('/{id}',[
+		'middleware'=>'auth',
+		'middleware'=>'checkforowner',
+		'as'=>'article.destroy',
+		'uses'=>'ArticlesController@destroy'
+	]);
 
-Route::get('/{id}',[
-	'as'=>'article.show',
-	'uses'=>'ArticlesController@show'
-]);
+	Route::get('/{id}',[
+		'as'=>'article.show',
+		'uses'=>'ArticlesController@show'
+	]);
 });
 Route::get('/notowner',function(){
-  echo "Bạn không có quyền sửa/xóa nội dung của user khác!!!";
+	echo "Bạn không có quyền sửa/xóa nội dung của user khác!!!";
 })->name('notowner');
 
 // Route::get('/articles',[
@@ -167,35 +169,35 @@ Route::get('/', 'PagesController@index');
 // Route::post('search_user','PagesController@search_user');
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home'); 
+
 Route::get('logout', 'Auth\LoginController@logout');
 
 Route::group(['prefix'=>'/comment'],function(){
 	Route::post('/{article_id}',[	
-	'middleware'=>'auth',
-	'uses'=>'CommentController@store',
-	'as'=>'comment.store'
-]);
+		'middleware'=>'auth',
+		'uses'=>'CommentController@store',
+		'as'=>'comment.store'
+	]);
 
-Route::get('/{id}/edit',[
-	'middleware'=>'auth',
-	'middleware'=>'checkforcomment',
-	'as'=>'comment.edit',
-	'uses'=>'CommentController@edit'
-]);
-    Route::put('/{id}',[
-	'middleware'=>'auth',
-	'middleware'=>'checkforcomment',
-	'as'=>'comment.update',
-	'uses'=>'CommentController@update'
-]);
+	Route::get('/{id}/edit',[
+		'middleware'=>'auth',
+		'middleware'=>'checkforcomment',
+		'as'=>'comment.edit',
+		'uses'=>'CommentController@edit'
+	]);
+	Route::put('/{id}',[
+		'middleware'=>'auth',
+		'middleware'=>'checkforcomment',
+		'as'=>'comment.update',
+		'uses'=>'CommentController@update'
+	]);
 
-Route::delete('/{id}',[
-	'middleware'=>'auth',
-	'middleware'=>'checkforcomment',
-	'as'=>'comment.destroy',
-	'uses'=>'CommentController@destroy'
-]);
+	Route::delete('/{id}',[
+		'middleware'=>'auth',
+		'middleware'=>'checkforcomment',
+		'as'=>'comment.destroy',
+		'uses'=>'CommentController@destroy'
+	]);
 });
 
 /*Route::post('comment/{article_id}',[	

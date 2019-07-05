@@ -53,13 +53,13 @@ class HomeController extends Controller
       return response()->json(['html'=>$view]);
     }
 
-    return view('user.home')->with('articles',$articles); 
+    return view('user.news_feed')->with('articles',$articles); 
       // redirect('/articles');
   }
 
   public function users(Request $request)
   {
-    $users=User::paginate(15);
+    $users=User::paginate(10);
     if ($request->ajax()) 
     {
       $view = view('user.userList',compact('users'))->render();
@@ -121,5 +121,6 @@ class HomeController extends Controller
         return response()->json(['html'=>$view]);
         }
       return view('user.search',['users'=>$users, 'keyword'=>$keyword]);
+      //redirect('/users')->withInput();
     }
 }

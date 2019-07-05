@@ -34,25 +34,25 @@ Cap nhat avatar ca nhan
             <div class="profile-header-container">
                 <div class="profile-header-img">
 
-                    <div class="row">
-                        <a href="{{url('/home')}}" class="btn btn-link">
+                    <!-- <div class="row">
+                        <a href="{{route('news_feed')}}" class="btn btn-link">
                         <i class="fas fa-chevron-left"></i>
-                        Back to home profile
+                        Back to your news feed page
                         </a>
                     </div>
-                    <br>
+                    <br> -->
                     <img class="rounded-circle" src="/storage/avatars/{{ $user->avatar }}" alt="avatar" />
                     <!-- badge -->
                     <div class="rank-label-container text-center">
-                        <br>
+                       <br>
                         <span class="label label-default rank-label">{{$user->name}}</span>
                     </div>
                 </div>
             </div>
 
         </div>
-        <br>
-        <div class="row justify-content-center">
+      
+        <div class="row justify-content-center text">
             <form action="/profile" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">

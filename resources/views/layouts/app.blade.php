@@ -29,7 +29,7 @@ $user = Auth::user();
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Trang chủ <!-- {{  config('app.name', 'Laravel') }} -->
+                    QBlog.com <!-- {{  config('app.name', 'Laravel') }} -->
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -69,11 +69,11 @@ $user = Auth::user();
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                    <a class="dropdown-item" href="/home">
+                                    <a class="dropdown-item" href="{{route('news_feed')}}">
                                         News feed
                                     </a>
 
-                                    <a class="dropdown-item" href="/profile">
+                                    <a class="dropdown-item" href="{{route('profile')}}">
                                         Change avatar
                                     </a>
 

@@ -74,7 +74,7 @@ class ArticlesController extends Controller
 			'content'=>$content,
 			'user_id'=>$user_id
 		]);
-		return redirect()->route('home');
+		return redirect()->route('news_feed');
 	}
 	public function edit($id)
 	{
@@ -107,7 +107,7 @@ public function update($id,ArticleFormRequest $request)
 		'image'=>$imageName,
 		'content'=>$request->get('content')
 	]);
-	return redirect()->route('home');
+	return redirect()->route('news_feed');
 }
 public function destroy($id)
 {
@@ -115,6 +115,6 @@ public function destroy($id)
 		//Comment::where('article_id',$id)->delete();
 		//$article->comment->delete();
 	$article->delete();
-	return redirect()->route('home');
+	return redirect()->route('news_feed');
 }
 }

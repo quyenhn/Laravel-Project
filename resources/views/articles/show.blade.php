@@ -23,7 +23,7 @@ Chi tiet bai viet
 <div class="container">
  <div class="row justify-content-center">
    <div class="col-sm-10">
-     <a href="{{url('/home')}}" class="btn btn-link">
+     <a href="{{route('news_feed')}}" class="btn btn-link">
        <i class="fas fa-chevron-left"></i>
        Back to your news feed
      </a>
