@@ -8,7 +8,7 @@ $(window).scroll(function() {
 });
 function loadMoreData(page,keyword){
   var url='?page=' + page;
-  if(keyword!==null) 
+  if(keyword!=null) 
   {
     url='?keyword='+ keyword +'&page=' + page;
   }
@@ -25,7 +25,7 @@ function loadMoreData(page,keyword){
   .done(function(data)
   {
     if(data.html == ""){
-      $('.ajax-load').html("Đã tải hết dữ liệu!");
+      $('.ajax-load').html("-Hết rồi, chẳng còn gì để xem cả!-");
       return;
     }
     $('.ajax-load').hide();

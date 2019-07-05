@@ -116,7 +116,7 @@ class HomeController extends Controller
         { 
           \Log::info('-----KeyWord -------' . $keyword);
         
-        $view = view('user.userList',['users'=>$users])->render();
+        $view = view('user.userList',compact('users'))->render();
          //->withDetails($users)->withQuery($keyword)
         return response()->json(['html'=>$view]);
         }
