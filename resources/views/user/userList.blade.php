@@ -18,4 +18,7 @@
             </strong></button>
         </div>
     @endforeach
+    <div class="col-md-12">
+   {{-- {{ $users->appends(request()->except('page'))->render() }}  --}}
+</div>
 @endif

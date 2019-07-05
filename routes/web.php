@@ -37,6 +37,7 @@ Route::post('wall/{profileId}/unfollow', 'ProfileController@unFollowUser')->name
 Route::get('show/{profileId}','ProfileController@show');*/
 
 Route::get('users', 'HomeController@users')->name('users');
+Route::get('search_user','HomeController@search')->name('user.search');
 Route::get('user/{id}', 'HomeController@user')->name('user.view');
 Route::post('ajaxRequest', 'HomeController@ajaxRequest')->name('ajaxRequest');
 
@@ -159,9 +160,10 @@ Route::get('/notowner',function(){
 
 Route::get('/', 'PagesController@index');
 
-Route::match(['get'], 'search_user',[
-        'as' => 'search_user',
-        'uses' => 'PagesController@search_user' ]);
+// Route::any('/search_user',[
+//         'as' => 'search_user',
+//         'uses' => 'PagesController@search_user' 
+// ]);
 // Route::post('search_user','PagesController@search_user');
 
 Auth::routes();

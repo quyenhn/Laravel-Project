@@ -14,13 +14,13 @@ Danh sach user
             <div class="col-md-6 form-inline justify-content-start">
               <label> List of Users, Total: {{$users->total()}} users </label>  
             </div>
-
             <div class="col-md-6 form-inline justify-content-end">
               <label>Search:&nbsp; 
-                <form action="search_user" method="get" role="search">
-                  {!! csrf_field() !!}
+                <form action="/search_user" method="get" role="search">
+                <div class="input-group">
                   <input type="text" name="keyword" class="form-control" placeholder="Type user name..."/>
                   <button class="icon" type="submit"><i class="fa fa-search"></i></button>
+                </div>
                 </form>
               </label>
             </div>

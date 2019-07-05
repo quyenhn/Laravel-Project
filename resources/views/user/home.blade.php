@@ -28,7 +28,7 @@ News feed ca nhan
  @if(count($articles)>0)
  <div class="row justify-content-center">
   <div class="col-sm-10">
-    <i>Các bài viết bạn đã tạo & bai viet cua nguoi ma ban follow: Tìm thấy {{$articles->total()}} bài viết!</i>
+    <i>Các bài viết bạn đã tạo & các bài viết của các tác giả bạn đã follow: Tìm thấy {{$articles->total()}} bài viết!</i>
   </div>
 </div>
 

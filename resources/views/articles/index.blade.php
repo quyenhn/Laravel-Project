@@ -9,7 +9,7 @@ Danh sách bài viết
 {{-- @if (!\Auth::check()) --}}
   <div class="row justify-content-center">
     <div class="col-sm-10">
-      <i>Danh sach toan bo cac bai viet nguoi dung da tao: Tìm thấy {{$articles->total()}} bài viết</i>
+      <i>Toàn bộ các bài đăng các user blog đã đăng tải: Tìm thấy {{$articles->total()}} bài viết!</i>
     </div>
   </div>
   

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 use App\Article;
 use Illuminate\Http\Request;
-use DB;
+use App\Http\Requests;
 use Auth;
 use App\User;
 use App\Follow;
-
+use Illuminate\Support\Facades\Input;
 use DataTables;
 use Illuminate\Support\Str;
 class HomeController extends Controller
@@ -107,4 +107,19 @@ class HomeController extends Controller
     return response()->json(['status'=>$status,'count'=>$count, 'auth_id' => auth()->user()->id]);
 
   }
+    public function search(Request $request)
+    {
+      $keyword=Input::get('keyword');
+        if ($keyword==null) return back();
+      $users=User::where('name','LIKE',"%$keyword%")->paginate(15)->setpath('');
+      if ($request->ajax()) 
+        { 
+          \Log::info('-----KeyWord -------' . $keyword);
+        
+        $view = view('user.userList',['users'=>$users])->render();
+         //->withDetails($users)->withQuery($keyword)
+        return response()->json(['html'=>$view]);
+        }
+      return view('user.search',['users'=>$users, 'keyword'=>$keyword]);
+    }
 }
