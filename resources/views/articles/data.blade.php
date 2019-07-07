@@ -7,7 +7,7 @@
 
 	@foreach($a->comment->sortByDesc('updated_at')->take(2) as $cm)
 	<hr>
-	<img src="/storage/avatars/{{ $cm->user->avatar }}" style="width:auto;height:20px;" alt="avatar" />
+	<img src="/storage/avatars/{{ $cm->user->avatar }}" style="width:20px;height:20px;" alt="avatar" />
 	<small>{{$cm->user->name}}</small>
 	<small> ({{$cm->updated_at}}) wrote:</small>
 	<div style="margin-left:23px;"><?php echo $cm->content ?></div>

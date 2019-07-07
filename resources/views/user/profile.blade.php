@@ -41,18 +41,17 @@ Cap nhat avatar ca nhan
                         </a>
                     </div>
                     <br> -->
-                    <img class="rounded-circle" src="/storage/avatars/{{ $user->avatar }}" alt="avatar" />
+                    <img class="rounded-circle-BO" src="/storage/avatars/{{ $user->avatar }}" alt="avatar" />
                     <!-- badge -->
                     <div class="rank-label-container text-center">
-                       <br>
-                        <span class="label label-default rank-label">{{$user->name}}</span>
+                        <h3><span class="label label-default rank-label">{{$user->name}}</span></h3>
                     </div>
                 </div>
             </div>
 
         </div>
       
-        <div class="row justify-content-center text">
+        <div class="row justify-content-center">
             <form action="/profile" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">

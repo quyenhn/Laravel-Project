@@ -57,7 +57,7 @@ Chi tiet bai viet
      <h4>Comments...</h4>
      @foreach($article->comment as $cm)
      <hr>
-     <img src="/storage/avatars/{{ $cm->user->avatar }}" style="width:auto;height: 50px;" alt="avatar" />
+     <img src="/storage/avatars/{{ $cm->user->avatar }}" style="width:50px;height: 50px;" alt="avatar" />
      <span>{{$cm->user->name}}</span><br>
      <small>{{$cm->updated_at}}</small>
      <span><?php echo $cm->content ?></span>

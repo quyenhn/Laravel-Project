@@ -8,7 +8,7 @@ use Auth;
 use App\User;
 use App\Follow;
 use Illuminate\Support\Facades\Input;
-use DataTables;
+use DB;
 use Illuminate\Support\Str;
 class HomeController extends Controller
 {
@@ -29,33 +29,41 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {   
-      $user = Auth::user();
       //  $articles= DB::table('articles')->where('user_id',$user->id)->orderBy('updated_at','desc')->paginate(3);
-      $articles=Article::where('user_id',$user->id)->get();//bai viet ban than
+    //  $articles=Article::where('user_id',$user->id)->get();//bai viet ban than
 
-    //  $user_login=User::find(Auth::user()->id);
+     // $user_login=User::find(Auth::user()->id);
      // $followings = $user->followings; //dd($followings);
         //bai viet cua nhung nguoi minh di follow ho.
      //$articles_following=Article::whereIn('user_id',$followings->pluck('id'))->get(); //dd($articles_following);
+      
+        // $articles_following = Article::whereHas('user.followers', function ($q) use ($userId) 
+        // {
+        //   return $q->where('follower_id', $userId);
+        // })
+        // ->get(); //dd($articles_following);
+   // $articles = $articles->merge($articles_following)->sortByDesc('updated_at')->paginate(3);
+      
+   /* $articles=Article::where(['user_id','user.followers'])->where(function($q)
+    {   $userId = Auth::user()->id;
+      return  $q->where(['user_id'=>$userId,'follower_id'=>$userId]);
+    });*/
 
-        $userId = Auth::user()->id;
-        $articles_following = \App\Article::whereHas('user.followers', function ($q) use ($userId) 
-        {
-          return $q->where('follower_id', $userId);
-        })
-        ->get(); //dd($articles_following);
-
-    $articles = $articles->merge($articles_following)->sortByDesc('updated_at')->paginate(3);
-
+    $articles = Article::select('articles.*')  //('articles.id','title','description','content','image','articles.created_at','articles.updated_at','user_id')
+    ->join('users', 'users.id', '=', 'articles.user_id')
+    ->leftJoin('followers','users.id','=','followers.leader_id')
+    ->where('user_id',auth()->user()->id)
+    ->orWhere('followers.follower_id',auth()->user()->id)
+    ->orderBy('updated_at','desc')->paginate(3);
+  // dd($articles);
     if ($request->ajax()) 
     {
       $view = view('articles.data',compact('articles'))->render();
       return response()->json(['html'=>$view]);
     }
-
     return view('user.news_feed')->with('articles',$articles); 
       // redirect('/articles');
-  }
+    }
 
   public function users(Request $request)
   {
