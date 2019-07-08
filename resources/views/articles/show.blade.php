@@ -32,7 +32,7 @@ Chi tiet bai viet
  
  <div class="row justify-content-center">
   <div class="col-sm-10">
-    <h2><strong>{{$article->title}}</strong></h2>
+    <h2 style="font-family: Arvo, Cambria, Georgia, Times, serif;font-size: 1.8em;">{{$article->title}}</h2>
     <img style="display: block;width: 100%;height: auto;" src="/storage/images/{{ $article->image }}" />
     <small>Create at: {{$article->created_at}}, Update at: {{$article->updated_at}}, Author: {{$article->user->name}}, {{count($article->comment)}} comments</small>
     <a style="float: right;" href="{{route('user.view',$article->user->id)}}">Follow at author's profile</a>
