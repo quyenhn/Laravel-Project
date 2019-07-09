@@ -2,7 +2,8 @@
 
 return [
 
-    'paginate'=> '2',
+    'paginate_article'=> '3',
+    'paginate_user'=>   '10',
     /*
     |--------------------------------------------------------------------------
     | Application Name

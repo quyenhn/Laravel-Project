@@ -43,7 +43,7 @@ News feed ca nhan
       <div style="font-size: 20px;"> 
         <a href="{{route('article.show',$a->id)}}" style="text-decoration: underline;">Read more</a>
         &nbsp;
-        <a href="{{route('article.show',$a->id)}}" style="text-decoration: underline;">{{count($a->comment)}} comments</a>
+        <a href="{{route('article.show',$a->id)}}" style="text-decoration: underline;">{{count($a->comments)}} comments</a>
       </div>
     </div>
     @endforeach--}}

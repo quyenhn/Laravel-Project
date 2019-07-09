@@ -49,13 +49,17 @@ class HomeController extends Controller
       return  $q->where(['user_id'=>$userId,'follower_id'=>$userId]);
     });*/
 
-    $articles = Article::select('articles.*')  //('articles.id','title','description','content','image','articles.created_at','articles.updated_at','user_id')
+ /*   $articles = Article::select('articles.*')  //('articles.id','title','description','content','image','articles.created_at','articles.updated_at','user_id')
     ->join('users', 'users.id', '=', 'articles.user_id')
     ->leftJoin('followers','users.id','=','followers.leader_id')
     ->where('user_id',auth()->user()->id)
     ->orWhere('followers.follower_id',auth()->user()->id)
-    ->orderBy('updated_at','desc')->paginate(3);
+    ->orderBy('updated_at','desc')->paginate(  config('app.paginate_article') );*/
   // dd($articles);
+    $articles = Article::select('articles.*')
+    ->join('followers','user_id','=','followers.leader_id')
+    ->Where('followers.follower_id',auth()->user()->id)
+    ->orderBy('updated_at','desc')->paginate(  config('app.paginate_article') ); 
     if ($request->ajax()) 
     {
       $view = view('articles.data',compact('articles'))->render();
@@ -67,7 +71,7 @@ class HomeController extends Controller
 
   public function users(Request $request)
   {
-    $users=User::paginate(10);
+    $users=User::paginate(config('app.paginate_user'));
     if ($request->ajax()) 
     {
       $view = view('user.userList',compact('users'))->render();
@@ -81,7 +85,7 @@ class HomeController extends Controller
 
     $user = User::find($id);
     if ($user==null)  return view('errors.404');
-    $articles=$user->article()->orderBy('updated_at','desc')->paginate(3);
+    $articles=$user->articles()->orderBy('updated_at','desc')->paginate(config('app.paginate_article'));
 
     if ($request->ajax()) 
     {
@@ -99,7 +103,7 @@ class HomeController extends Controller
   {
     $user = User::find($request->user_id);
 
-    $follow = Follow::where('leader_id', $user->id)->first();
+    $follow = Follow::where('leader_id', $user->id)->where('follower_id',auth()->user()->id)->first();
 
     if($follow){
       $follow->delete();
@@ -119,7 +123,7 @@ class HomeController extends Controller
     {
       $keyword=Input::get('keyword');
         if ($keyword==null) return back();
-      $users=User::where('name','LIKE',"%$keyword%")->paginate(15)->setpath('');
+      $users=User::where('name','LIKE',"%$keyword%")->paginate(config('app.paginate_user'))->setpath('');
       if ($request->ajax()) 
         { 
           \Log::info('-----KeyWord -------' . $keyword);

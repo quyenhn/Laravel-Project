@@ -14,14 +14,15 @@ class ArticlesController extends Controller
 	{   
 		/*if (!\Auth::check())
 		{*/
-			$articles=Article::orderBy('updated_at','desc')->paginate(3); 
+			$articles=Article::with('latestComments')->orderBy('updated_at','desc')->paginate(config('app.paginate_article')); 
+			// $posts=Article::all();
+	
+			// dd($comments);
 ////
 			if ($request->ajax()) 
 			{
-
 				$view = view('articles.data',compact('articles'))->render();
 				return response()->json(['html'=>$view]);
-
 			}
 /////
 			return view('articles.index',compact('articles'));//->with('articles', $articles);
@@ -82,9 +83,9 @@ class ArticlesController extends Controller
 		return view('articles.edit', compact('article') );
 /*$article=  DB::table('articles')->select('articles.id','title','content','articles.created_at','articles.updated_at','user_id','name')->join('users','users.id','=','articles.user_id')->where('articles.id',$id)->get() ;
 return view ('articles.edit')->with('article',$article);*/
-}
-public function update($id,ArticleFormRequest $request)
-{   
+	}
+	public function update($id,ArticleFormRequest $request)
+	{   
 
 	$user = Auth::user();
 
@@ -108,13 +109,13 @@ public function update($id,ArticleFormRequest $request)
 		'content'=>$request->get('content')
 	]);
 	return redirect()->route('news_feed');
-}
-public function destroy($id)
-{
+	}
+	public function destroy($id)
+	{
 	$article=Article::find($id);
 		//Comment::where('article_id',$id)->delete();
 		//$article->comment->delete();
 	$article->delete();
 	return redirect()->route('news_feed');
-}
+	}
 }

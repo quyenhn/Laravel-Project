@@ -48,11 +48,11 @@ class User extends Authenticatable /*Model implements //Authenticatable
     ];
 
     /*protected $table = 'users';*/
-    public function article()
+    public function articles()
     {
         return $this->hasMany('App\Article','user_id','id');
     }
-    public function comment()
+    public function comments()
     {
         return $this->hasMany('App\Comment','user_id','id');
     }
@@ -60,24 +60,27 @@ class User extends Authenticatable /*Model implements //Authenticatable
  * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
  */
     public function followers()
-{
+    {
     return $this->belongsToMany(User::class, 'followers', 'leader_id', 'follower_id')->withTimestamps();
-}
-
+    }
 /**
  * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
  */
     public function followings()
-{
+    {
     return $this->belongsToMany(User::class, 'followers', 'follower_id', 'leader_id')->withTimestamps();
-}
-        public function isFollowing(User $user)
-{
+    }
+    public function isFollowing(User $user)
+    {
     return  $this->followings()->where('leader_id', $user->id)->count();
-}
-        public function isFollowedBy(User $user)
-{
+    }   
+    public function isFollowedBy(User $user)
+    {
     return  $this->followers()->where('follower_id', $user->id)->count();
+    }
+    
+    public function messages()
+    {
+      return $this->hasMany(Message::class);
+    }
 }
-}
-
