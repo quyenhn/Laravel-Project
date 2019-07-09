@@ -78,7 +78,10 @@ class User extends Authenticatable /*Model implements //Authenticatable
     {
     return  $this->followers()->where('follower_id', $user->id)->count();
     }
-    
+    public function friends()
+    {
+        return $this->followers->merge($this->followings);
+    }
     public function messages()
     {
       return $this->hasMany(Message::class);

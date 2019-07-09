@@ -57,7 +57,7 @@ Tuong ca nhan cua user
 
    @if(count($articles)>0)
           <div class="row justify-content-center">
-              <div class="col-sm-10" style="margin-top: 20px">
+              <div class="col-sm-6" style="margin-top: 20px">
                   <i>Các bài viết của người dùng này: Tìm thấy {{$articles->total()}} bài viết!</i>
               </div>
           </div>
@@ -81,7 +81,7 @@ Tuong ca nhan cua user
           </div>
     @else
 <div class="row justify-content-center"> 
-  <div class="col-sm-10" style="margin-top: 20px">
+  <div class="col-sm-6" style="margin-top: 20px">
     <i>User này chưa đăng tải bài viết nào!</i>
   </div>
 </div>
@@ -96,6 +96,6 @@ Tuong ca nhan cua user
 @endsection
 
 @section('body.js')
-<script src="{{ asset('js/app.js') }}"></script> 
-<script src="{{ asset('js/custom.js') }}" defer></script>
+<script src="{{ asset('js/script.js') }}"></script> 
+<!-- <script src="{{ asset('js/custom.js') }}" defer></script> -->
 @endsection

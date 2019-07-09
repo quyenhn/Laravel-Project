@@ -8,7 +8,7 @@ Danh sách bài viết
 <div class="container">
 {{-- @if (!\Auth::check()) --}}
   <div class="row justify-content-center">
-    <div class="col-sm-10">
+    <div class="col-sm-6" >
       <i>Toàn bộ các bài đăng các user blog đã đăng tải: Tìm thấy {{$articles->total()}} bài viết!</i>
     </div>
   </div>
@@ -72,5 +72,5 @@ Danh sách bài viết
 @stop
 
 @section('body.js')
-<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
 @stop

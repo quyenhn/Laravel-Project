@@ -161,7 +161,7 @@ Route::get('/notowner',function(){
 // Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 Route::get('/', 'PagesController@index');
-
+Route::get('/chat','ChatController@index')->name('chat');
 // Route::any('/search_user',[
 //         'as' => 'search_user',
 //         'uses' => 'PagesController@search_user' 

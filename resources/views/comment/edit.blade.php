@@ -9,7 +9,7 @@ Chinh sua noi dung comment
 
 @section('body.js')
 <script>
-     CKEDITOR.replace( 'editor' );
+	CKEDITOR.replace( 'editor' );
 </script>
 @stop
 @section('content')
@@ -46,7 +46,7 @@ Chinh sua noi dung comment
 		 			<button class="btn btn-primary">Them bai viet</button> 
 		 		</div>
 		 	</form> -->
-            
+
 		 	{!! Form::model($comment,[
 		 		'route'=>['comment.update',$comment->id],
 		 		'method'=>'PUT',
@@ -54,16 +54,16 @@ Chinh sua noi dung comment
 		 		'enctype'=>'multipart/form-data'
 		 		])
 		 		!!}
-		 	<div class="form-group">
-  {!! Form::label('edit_comment','Edit a Comment...',['class'=>'control-label'])!!}
-  {!! Form::textarea('content', null ,['rows'=>'3','id'=>'editor','class'=>'form-control'])!!}
-            </div>
-<div class="form-group">
-  {!! Form::submit('Update comment',['class'=>'btn btn-success'])!!}
-</div>	
-		    {!! Form::close()!!}
-            
-		 	</div>
+		 		<div class="form-group">
+		 			{!! Form::label('edit_comment','Edit a Comment...',['class'=>'control-label'])!!}
+		 			{!! Form::textarea('content', null ,['rows'=>'3','id'=>'editor','class'=>'form-control'])!!}
+		 		</div>
+		 		<div class="form-group">
+		 			{!! Form::submit('Update comment',['class'=>'btn btn-success'])!!}
+		 		</div>	
+		 		{!! Form::close()!!}
+
 		 </div>
-		</div>
-		@stop
+	</div>
+</div>
+@stop

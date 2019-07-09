@@ -20,7 +20,8 @@ $user = Auth::user();
     <!-- Styles -->
     <link rel="stylesheet" href="{{asset('css/bootstrap4.min.css')}}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+   <!--  <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @yield('head.css')
 
 </head>
@@ -29,7 +30,8 @@ $user = Auth::user();
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <!-- QBlog.com  --> {{  config('app.name', 'Laravel') }} 
+                    <!-- QBlog.com  --> <img src="https://3.bp.blogspot.com/-mqlRgMRUrrU/WfgN34irWfI/AAAAAAAADqQ/8KA6OXN6gMAgOi0qlRod1Z5qtId7Yqf6QCLcBGAs/s1600/blogger_icon.png" style="height: 30px;">
+                     {{  config('app.name', 'QBlog.com') }} 
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -41,7 +43,8 @@ $user = Auth::user();
                         
                         @if(\Auth::check())
                         <li><a href="{{route('article.create')}}">Create new article</a></li>
-                        <li style="padding:0 15px;"><a href="{{route('users')}}">List all users</a></li>
+                        <li style="padding:0 1rem;"><a href="{{route('users')}}">List all users</a></li>
+                        <li><a href="{{route('news_feed')}}">News feed</a></li>
                         @endif
                     
                     </ul>
@@ -69,8 +72,8 @@ $user = Auth::user();
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                    <a class="dropdown-item" href="{{route('news_feed')}}">
-                                        News feed
+                                    <a class="dropdown-item" href="{{route('chat')}}">
+                                        Chat room
                                     </a>
 
                                     <a class="dropdown-item" href="{{route('profile')}}">
@@ -107,7 +110,8 @@ $user = Auth::user();
     <script src="/js/bootstrap4.min.js"></script>
 <!-- <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> -->
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
-    <!-- <script src="{{ asset('js/app.js') }}" defer></script>  -->
+    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+    <script src="{{ asset('js/custom.js') }}" defer></script>
     @yield('body.js')
 </body>
 </html>

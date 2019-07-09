@@ -27,8 +27,8 @@ News feed ca nhan
 <div class="container">
  @if(count($articles)>0)
  <div class="row justify-content-center">
-  <div class="col-sm-10">
-    <i>Các bài viết bạn đã tạo & các bài viết của các tác giả bạn đã follow: Tìm thấy {{$articles->total()}} bài viết!</i>
+  <div class="col-sm-6">
+    <i>Các bài viết bạn đã tạo & của các tác giả bạn đã follow: Tìm thấy {{$articles->total()}} bài viết!</i>
   </div>
 </div>
 
@@ -52,7 +52,7 @@ News feed ca nhan
 
   @else
   <div class="row justify-content-center">
-    <div class="col-sm-10">
+    <div class="col-sm-6">
       <i>Bạn chưa đăng bài viết nào cũng chưa follow ai cả!</i>
     </div>
   </div>
@@ -67,5 +67,5 @@ News feed ca nhan
 @endsection
 
 @section('body.js')
-<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
 @stop
