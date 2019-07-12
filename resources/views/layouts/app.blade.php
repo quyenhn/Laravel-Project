@@ -7,7 +7,7 @@ $user = Auth::user();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : 'null' }}">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -18,10 +18,10 @@ $user = Auth::user();
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{asset('css/bootstrap4.min.css')}}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-   <!--  <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="{{asset('css/bootstrap4.min.css')}}"> -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('head.css')
 
 </head>
@@ -39,12 +39,13 @@ $user = Auth::user();
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                        
+                    <ul class="navbar-nav mr-auto menu">
+
                         @if(\Auth::check())
-                        <li><a href="{{route('article.create')}}">Create new article</a></li>
-                        <li style="padding:0 1rem;"><a href="{{route('users')}}">List all users</a></li>
-                        <li><a href="{{route('news_feed')}}">News feed</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('article.create')}}">New article</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('users')}}">All users</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('news_feed')}}">News feed</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('chat.index')}}">Chat room</a></li>
                         @endif
                     
                     </ul>
@@ -61,21 +62,13 @@ $user = Auth::user();
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
-                        @else <img  src="/storage/avatars/{{ $user->avatar }}" style=" border-radius: 50%;width:50px;height: 50px;" alt="avatar"/>
+                        @else 
+        <li class="nav-item"><img src="/storage/avatars/{{ $user->avatar }}" style=" border-radius: 50%;width:50px;height: 50px;" alt="avatar"/></li>
                             <li class="nav-item dropdown">
-                                
-                          <!--   <li><img  src="/storage/avatars/{{ $user->avatar }}" style=" border-radius: 50%;width:50px;height: 50px;" alt="avatar"/></li> -->
-
                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                                    <a class="dropdown-item" href="{{route('chat')}}">
-                                        Chat room
-                                    </a>
-
                                     <a class="dropdown-item" href="{{route('profile')}}">
                                         Change avatar
                                     </a>
@@ -106,12 +99,10 @@ $user = Auth::user();
     </div>
     @include('partials.footer') 
     <!-- Scripts -->
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap4.min.js"></script>
-<!-- <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
-    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
-    <script src="{{ asset('js/custom.js') }}" defer></script>
+    <!-- <script src="/js/bootstrap4.min.js"></script> -->
+    <script src="{{ asset('js/jquery.min.js') }}" ></script>
+    <script src="{{ asset('js/custom.js') }}" ></script>
+    <script src="{{ asset('js/app.js') }}" ></script>
     @yield('body.js')
 </body>
 </html>

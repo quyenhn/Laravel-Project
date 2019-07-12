@@ -10,7 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/chat', 'ChatController@index')->name('chat.index');
+Route::get('/contacts', 'ChatController@get');
+Route::get('/conversation/{id}', 'ChatController@getMessagesFor');
+Route::post('/conversation/send', 'ChatController@send');
 /*Route::get('/', function () {
     // return view('welcome');
     return "Hello Quyen";
@@ -161,7 +164,24 @@ Route::get('/notowner',function(){
 // Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 Route::get('/', 'PagesController@index');
-Route::get('/chat','ChatController@index')->name('chat');
+
+/*Route::group(['prefix'=>'/chat'],function(){
+	Route::get('',[
+		'middleware'=>'auth',
+		'uses'=>'ChatController@index',
+		'as'=>'chat.index'
+	]);
+	Route::get('/{user_id}',[
+		'middleware'=>'auth',
+		'uses'=>'ChatController@show',
+		'as'=>'chat.show'
+	]);
+	Route::post('/history/{chatRoomId}',[
+		'middleware'=>'auth',
+		'uses'=>'ChatController@history',
+		'as'=>'chat.history'
+	]);
+});*/
 // Route::any('/search_user',[
 //         'as' => 'search_user',
 //         'uses' => 'PagesController@search_user' 

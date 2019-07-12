@@ -96,6 +96,6 @@ Tuong ca nhan cua user
 @endsection
 
 @section('body.js')
-<script src="{{ asset('js/script.js') }}"></script> 
+<script src="{{ asset('js/script.js') }}" ></script>
 <!-- <script src="{{ asset('js/custom.js') }}" defer></script> -->
 @endsection

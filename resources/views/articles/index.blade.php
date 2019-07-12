@@ -72,5 +72,5 @@ Danh sách bài viết
 @stop
 
 @section('body.js')
-<script type="text/javascript" src="js/script.js"></script>
+<script src="{{ asset('js/script.js') }}" ></script>
 @stop

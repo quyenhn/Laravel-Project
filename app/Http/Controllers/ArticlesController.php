@@ -17,7 +17,7 @@ class ArticlesController extends Controller
 			$articles=Article::with('latestComments')->orderBy('updated_at','desc')->paginate(config('app.paginate_article')); 
 			// $posts=Article::all();
 	
-			// dd($comments);
+			 //dd($articles);
 ////
 			if ($request->ajax()) 
 			{

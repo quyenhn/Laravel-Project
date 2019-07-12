@@ -38,6 +38,6 @@ Danh sach user tim kiem duoc
 @endsection
 
 @section('body.js')
-<script src="{{ asset('js/script.js') }}"></script>
+<script src="{{ asset('js/script.js') }}" ></script>
 <!-- <script src="{{ asset('js/custom.js') }}" defer></script>  -->
 @stop
