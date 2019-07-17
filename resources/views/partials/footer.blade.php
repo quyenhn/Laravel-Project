@@ -1,7 +1,9 @@
-<div id="footer" class="container-fluid">
-	<div class="row justify-content-center text-center">
-		<div class="col-md-10">
-			<p>Copyright &copy; 2019, by Hoàng Ngọc Quyến</p>
+<footer class="bg-white">
+	<div class="container-fluid">
+		<div class="row justify-content-center text-center">
+			<div class="col-md-8">
+				<p style="margin-top: 1rem;">Copyright &copy; 2019, by Hoàng Ngọc Quyến</p>
+			</div>
 		</div>
 	</div>
-</div>
+</footer>

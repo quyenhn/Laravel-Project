@@ -10,7 +10,7 @@
                     <p class="name">{{ contact.name }}</p>
                     <p class="email">{{ contact.email }}</p>
                 </div>
-                <small><i aria-hidden="true" class="fa fa-circle float-right text-success" style="margin: 0;position: absolute;top: 50%;right: 0%;transform: translate(-50%, -50%);" v-if="contact.online"></i></small>
+                <small><i aria-hidden="true" class="fa fa-circle pull-right text-success" style="margin: 0;position: absolute;top: 50%;right: 0%;transform: translate(-50%, -50%);" v-if="contact.online"></i></small>
                 <span class="unread" v-if="contact.unread">{{ contact.unread }}</span>
             </li>
             <li v-show="contacts.length === 0" disabled>No contacts found</li>
@@ -57,7 +57,7 @@
         },
 
         created() {
-            Echo.join(`chat`)
+            Echo.join(`messages`)
             .here(users => {
                 this.contacts.forEach(contact => {
                   users.forEach(user => {

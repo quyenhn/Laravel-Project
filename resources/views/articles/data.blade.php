@@ -1,14 +1,14 @@
 @foreach ($articles as $a)
 <div class="col-sm-10">
 	<div class="date">
-		<p><span class='day'>{{$a->created_at->day}}</span>{{$a->created_at->month}} / {{$a->created_at->year}}</p> 
+		<p><span class='day'>{{$a->created_at->format('d')}}</span>
+		   <span>{{$a->created_at->format('M')}} / {{$a->created_at->year}}</span></p> 
 	</div>
-
 	<h2 style="font-family: Arvo, Cambria, Georgia, Times, serif; font-size: 1.8em;">
-		<a style="color:#000;" href="{{route('article.show',$a->id)}}">{{$a->title}}</a>
+		<a href="{{route('article.show',$a->id)}}">{{$a->title}}</a>
 	</h2>
 	<img  src="/storage/images/{{ $a->image }}" style="display: block;width: 100%;height: auto;"/>
-	<small>Updated at: {{$a->updated_at}}, Author: {{$a->user->name}}</small>
+	<small>Updated at: {{$a->updated_at}}, Author: {{$a->user->name}}, {{$a->comments->count()}} comments</small>
 	<p style="margin-bottom: 0px;"> {{$a->description}} </p>
 	
 	@foreach($a->latestComments as $cm)
@@ -19,10 +19,10 @@
 	<div style="margin-left:23px;"><?php echo $cm->content ?></div>
 	@endforeach 
 	<hr>
-	<div style="font-size: 20px;">
-		<a href="{{route('article.show',$a->id)}}" style="text-decoration: underline;">Read more</a>
-		&nbsp;
-		<a href="{{route('article.show',$a->id)}}"  style="text-decoration: underline;">{{count($a->comments)}} comments</a>
-	</div>
+	<!-- <div style="font-size: 20px;"> -->
+		<a class="btn btn-info" href="{{route('article.show',$a->id)}}">Read more</a>
+		<!-- &nbsp;
+		<a href="{{route('article.show',$a->id)}}"  style="text-decoration: underline;">{{count($a->comments)}} comments</a> -->
+	<!-- </div> -->
 </div>
 @endforeach

@@ -31,33 +31,7 @@
             axios.get('/contacts')
             .then((response) => {
                 this.contacts = response.data;
-            });
-
-
-      /*              return this.contacts;
-                }).then(contacts => {
-
-                    Echo.join('messages')
-                      .here(users => {
-                        contacts.forEach(contact => {
-                          users.forEach(user => {
-                            if (user.id == contact.id) {
-                              contact.online = true;
-                            }
-                          });
-                        });
-                      }).joining(user => {
-                this.contacts.forEach(
-                  contact => (user.id == contact.id ? (contact.online = true) : "")
-                );
-              })
-              .leaving(user => {
-                this.contacts.forEach(
-                  contact => (user.id == contact.id ? (contact.online = false) : "")
-                );
-              });
-          });             */
-          
+            });          
       },
       methods: {
         startConversationWith(contact) {
@@ -94,9 +68,33 @@
     },
     components: {Conversation, ContactsList}
 }
+      /*              return this.contacts;
+                }).then(contacts => {
+
+                    Echo.join('messages')
+                      .here(users => {
+                        contacts.forEach(contact => {
+                          users.forEach(user => {
+                            if (user.id == contact.id) {
+                              contact.online = true;
+                            }
+                          });
+                        });
+                      }).joining(user => {
+                this.contacts.forEach(
+                  contact => (user.id == contact.id ? (contact.online = true) : "")
+                );
+              })
+              .leaving(user => {
+                this.contacts.forEach(
+                  contact => (user.id == contact.id ? (contact.online = false) : "")
+                );
+              });
+          });             */
 </script>
 <style lang="scss" scoped>
 .chat-app {
     display: flex;
 }
 </style>
+

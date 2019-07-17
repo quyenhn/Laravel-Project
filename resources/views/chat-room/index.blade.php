@@ -6,7 +6,7 @@
 		<div class="col-sm-12">
 			<div class="card">
 				<div class="card-header">Messenger with your friends <i class="fa fa-heart" style="color:red;" aria-hidden="true"></i></div>
-				<div class="card-body" id="app">
+				<div class="card-body">
 					<audio id="ChatAudio">
 						<source src="https://static.xx.fbcdn.net/rsrc.php/yy/r/XFhtdTsftOC.ogg">
 					</audio>

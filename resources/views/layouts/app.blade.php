@@ -7,7 +7,7 @@ $user = Auth::user();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : 'null' }}">
+    
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -20,18 +20,18 @@ $user = Auth::user();
     <!-- Styles -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <!-- <link rel="stylesheet" href="{{asset('css/bootstrap4.min.css')}}"> -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @yield('head.css')
 
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <!-- QBlog.com  --> <img src="https://3.bp.blogspot.com/-mqlRgMRUrrU/WfgN34irWfI/AAAAAAAADqQ/8KA6OXN6gMAgOi0qlRod1Z5qtId7Yqf6QCLcBGAs/s1600/blogger_icon.png" style="height: 30px;">
-                     {{  config('app.name', 'QBlog.com') }} 
+                <img src="https://3.bp.blogspot.com/-mqlRgMRUrrU/WfgN34irWfI/AAAAAAAADqQ/8KA6OXN6gMAgOi0qlRod1Z5qtId7Yqf6QCLcBGAs/s1600/blogger_icon.png" style="height: 30px;"/>
+                {{  config('app.name', 'QBlog.com') }} 
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -45,7 +45,8 @@ $user = Auth::user();
                         <li class="nav-item"><a class="nav-link" href="{{route('article.create')}}">New article</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('users')}}">All users</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('news_feed')}}">News feed</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('chat.index')}}">Chat room</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('chat.index')}}">Public chat (Socket.IO-Redis-Nodejs)</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('chat.index')}}">Private chat (Echo-Pusher-Vuejs)</a></li>
                         @endif
                     
                     </ul>
@@ -63,7 +64,7 @@ $user = Auth::user();
                                 </li>
                             @endif
                         @else 
-        <li class="nav-item"><img src="/storage/avatars/{{ $user->avatar }}" style=" border-radius: 50%;width:50px;height: 50px;" alt="avatar"/></li>
+                            <li class="nav-item"><img src="/storage/avatars/{{ $user->avatar }}" style=" border-radius: 50%;width:50px;height: 50px;" alt="avatar"/></li>
                             <li class="nav-item dropdown">
                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -90,14 +91,15 @@ $user = Auth::user();
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4" style="padding-top: 4.5rem !important;;">
             @yield('content')
             <div class="ajax-load text-center" style="display:none">
               <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More</p>
             </div>
         </main>
-    </div>
-    @include('partials.footer') 
+
+        @include('partials.footer')
+    </div> 
     <!-- Scripts -->
     <!-- <script src="/js/bootstrap4.min.js"></script> -->
     <script src="{{ asset('js/jquery.min.js') }}" ></script>

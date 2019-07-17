@@ -18,7 +18,7 @@ class NewMessage implements ShouldBroadcast
      * @return void
      */
     public function __construct(Message $message)
-    {
+    {   
         $this->message = $message;
     }
     /**
@@ -34,7 +34,6 @@ class NewMessage implements ShouldBroadcast
     }
     public function broadcastWith()
     {
-        
         // $this->message->load('fromContact');
         // return ["message" => /*$this->message->to != $this->message->from ? */$this->message];
         $this->message->load('fromContact');

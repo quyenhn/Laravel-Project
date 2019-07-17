@@ -8,21 +8,19 @@
   text-align: center;
 }
 */
-#footer{
-	margin-top: 0px;
-	padding-bottom: 20px;
+#app{
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
 }
-#footer .col-md-10{
-	padding-top: 35px;
-	
+.py-4{
+	flex: 1;
 }
-li>a{
-	color: #777;
-	text-decoration: none;
+a{
+	color:#000;
 }
 a:hover {
-	color: #333;
-	background-color: transparent;
+	color: #6cb2eb;
 	text-decoration: none;
 }
 body{
@@ -43,8 +41,6 @@ body{
 	padding: 10px 0px;
 	width: 100%;
 }
-
-
 .date {
 	background: url(http://2.bp.blogspot.com/-rgbMJms0Tzw/VuEzZ9P-qlI/AAAAAAAAAW0/M-Wn5H0S4jk/s000/sprite.png) bottom left no-repeat;
 	float: left;
@@ -56,10 +52,10 @@ body{
 	background: #eb374b;
 	color: #fff;
 	font-family: Arvo, Cambria, Georgia, Times, serif;
-	font-size: 0.75em;
-	line-height: 1.1;
+	font-size: 0.85em;
+	line-height: 1;
 	margin-bottom: 0;
-	padding: 5px 10px;
+	padding: 3px 5px;
 	text-align: right;
 	text-transform: uppercase;
 }
@@ -71,5 +67,5 @@ body{
 .date .day {
 	clear: both;
 	display: block;
-	font-size: 2em;
+	font-size: 1.8em;
 }
