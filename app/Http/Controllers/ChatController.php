@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use App\Message;
+use Redis;
 use App\Events\NewMessage;
 use Illuminate\Http\Request;
 
@@ -61,5 +62,40 @@ class ChatController extends Controller
          return view('chat-room.index');
         //  $friends = Auth::user()->friends();
         // return view('chat-room.index', compact('friends'));
+    }
+////chat public
+    public function getMessages()//get messages public
+    {
+        $messages = Message::where('to',null)->select('messages.*','name','avatar')->join('users','users.id','=','from')->get();
+
+        return response()->json($messages,200);
+    }
+    public function sendMessage(Request $request)//send messages to public 
+    {
+        //$data = $request->only(['name','body']);
+        $message = Message::create([
+            'from' => auth()->id(),
+            'text' => $request->text
+        ]);
+
+        $redis = Redis::connection();
+        $redis->publish('message',json_encode($message));
+        
+        return response()->json($message,200);
+    }
+    public function public_chat()
+    {
+         return view('chat-room.public_chat');
+    }
+    public function getAllUser()
+    {
+         $users = User::all();
+         return response()->json($users);
+    }
+    public function send_public()
+    {
+         $redis = Redis::connection();
+        $redis->publish('message',"day la tin nhan test ne`");
+        return "da published";
     }
 }

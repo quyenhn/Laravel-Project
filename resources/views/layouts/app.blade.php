@@ -7,7 +7,7 @@ $user = Auth::user();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+    <meta name="user-id" content="{{ Auth::check() ? Auth::user()->id : 'null' }}">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -45,8 +45,8 @@ $user = Auth::user();
                         <li class="nav-item"><a class="nav-link" href="{{route('article.create')}}">New article</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('users')}}">All users</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('news_feed')}}">News feed</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('chat.index')}}">Public chat (Socket.IO-Redis-Nodejs)</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('chat.index')}}">Private chat (Echo-Pusher-Vuejs)</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('chat.public_chat')}}">Public chat (SocketIO-Redis-Nodejs)</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('chat.index')}}">Private chat (Echo-Pusher)</a></li>
                         @endif
                     
                     </ul>

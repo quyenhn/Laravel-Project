@@ -11,4 +11,7 @@ class Message extends Model
     {
     	return $this->hasOne(User::class, 'id', 'from');
     }
+    public function user() {
+        return $this->belongsTo(User::class,'from','id');
+    }
 }

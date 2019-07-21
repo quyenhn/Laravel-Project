@@ -9,7 +9,14 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+*////group chat
+Route::get('/send','ChatController@send_public');//test
+
+Route::get('/getAllUser','ChatController@getAllUser')->middleware('auth');
+Route::get('/public_chat', 'ChatController@public_chat')->name('chat.public_chat')->middleware('auth');
+Route::get('/messages','ChatController@getMessages')->middleware('auth');
+Route::post('/sendMessage','ChatController@sendMessage')->middleware('auth');
+///////private chat
 Route::get('/chat', 'ChatController@index')->name('chat.index');
 Route::get('/contacts', 'ChatController@get');
 Route::get('/conversation/{id}', 'ChatController@getMessagesFor');
