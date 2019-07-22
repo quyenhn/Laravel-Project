@@ -17,7 +17,7 @@ class ChatController extends Controller
         //return view('chat-room.index', compact('friends'));
                 // get a collection of items where sender_id is the user who sent us a message
         // and messages_count is the number of unread messages we have from him
-        $unreadIds = Message::select(\DB::raw('`from` as sender_id, count(`from`) as messages_count'))
+        $unreadIds = Message::select(\DB::raw('"from" as sender_id, count("from") as messages_count'))
             ->where('to', auth()->id())
             ->where('read', false)
             ->groupBy('from')
