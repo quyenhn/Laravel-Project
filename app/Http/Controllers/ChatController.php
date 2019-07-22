@@ -43,7 +43,7 @@ class ChatController extends Controller
         })->orWhere(function($q) use ($id) {
             $q->where('from', $id);
             $q->where('to', auth()->id());
-        })
+        })->orderBy('created_at','asc')
         ->get();
         return response()->json($messages);
     }
