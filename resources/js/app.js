@@ -5,13 +5,11 @@
  */
 
 require('./bootstrap');
-
-import VueSocketio from 'vue-socket.io';
-import socketio from 'socket.io-client'
-
 window.Vue = require('vue');
 
-Vue.use(VueSocketio, socketio(':process.env.PORT') || socketio(':3000'));
+import VueSocketio from 'vue-socket.io';
+import socketio from 'socket.io-client';
+Vue.use(VueSocketio, socketio(process.env.URL + process.env.PORT));  //socketio(':process.env.PORT') || socketio(':3000') );
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
