@@ -1,2 +1,2 @@
 # Laravel-Project
-hướng dẫ sử dụng
+hướng dẫn sử dụng
