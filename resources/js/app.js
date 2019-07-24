@@ -10,7 +10,7 @@ window.Vue = require('vue');
 import VueSocketio from 'vue-socket.io';
 import socketio from 'socket.io-client';
 const socketServer = 'qblog-laravel.herokuapp.com:'+process.env.PORT;
-Vue.use(VueSocketio,  socketio(socketServer));   //(process.env.ROOT_URL+':'+process.env.PORT) );
+Vue.use(VueSocketio,  socketio('localhost:3000'));   //(process.env.ROOT_URL+':'+process.env.PORT) );
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
