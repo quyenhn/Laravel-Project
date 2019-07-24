@@ -70,7 +70,7 @@ class ChatController extends Controller
 ////chat public
     public function getMessages()//get messages public
     {
-        $messages = Message::where('to',null)->select('messages.*','name','avatar')->join('users','users.id','=','from')->get();
+        $messages = Message::where('to',null)->select('messages.*','name','avatar')->join('users','users.id','=','from')->orderBy('created_at','asc')->get();
 
         return response()->json($messages,200);
     }
