@@ -2,7 +2,7 @@
  <div class="col-md-3">
    <div class="card">
     <div class="card-header">
-      List of users in the blog
+      List users logged in the blog
     </div>
     <div class="card-body ">
       <!-- <h5 class="card-title">User List</h5> -->

@@ -7,7 +7,7 @@ use Redirect;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Support\Facades\Redis;
 class LoginController extends Controller
 {
     /*
@@ -39,11 +39,48 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    public function logout(Request $request) {
-     Auth::logout();
-     return redirect('/login');
-/*    Auth::logout();
-    Session::flash('message', "Logout success sir!");
-    return Redirect::to('/login');*/
+    /*public function logout(Request $request) 
+    {
+       Auth::logout();
+       return redirect('/login');
+    //Auth::logout();
+    //Session::flash('message', "Logout success sir!");
+    //return Redirect::to('/login');
+    }*/
+
+    // Overriding the authenticated method from Illuminate\Foundation\Auth\AuthenticatesUsers
+    protected function authenticated(Request $request, $user)
+    {
+        // Building namespace for Redis
+        $id = $user->id;
+        $browser = $request->server('HTTP_USER_AGENT');
+        $namespace = 'users:'.$id.$browser;
+
+        // Getting the expiration from the session config file. Converting from minutes to seconds.
+        $expire = config('session.lifetime') * 60;
+
+        // Setting redis using id as value
+        Redis::SET($namespace,$id);
+        Redis::EXPIRE($namespace,$expire);
+    }
+
+    // Overriding the logout method from Illuminate\Foundation\Auth\AuthenticatesUsers
+    public function logout(Request $request)
+    {
+        // Building namespace for Redis
+        $id = Auth::user()->id;
+        $browser = $request->server('HTTP_USER_AGENT');
+        $namespace = 'users:'.$id.$browser;
+
+        // Deleting user from redis database when they log out
+        Redis::DEL($namespace);
+
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
+        return redirect('/');
     }
 }

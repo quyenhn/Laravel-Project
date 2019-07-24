@@ -8,18 +8,15 @@ use App\User;
 use App\Article;
 use Auth;
 class CommentController extends Controller
-{
-    public function destroy($id)
+{   
+    public function __construct()
     {
-    	$comment=Comment::find($id);
-    	$comment->delete();
-        return redirect()->back();
-    	//return redirect()->route('article.show',[$comment->article->id]);
+        $this->middleware('auth');
+        $this->middleware('checkforcomment')->except('store');
     }
+    
     public function store($article_id,Request $request)
     {
-    	//$article_id=$article_id;
-        //dd($article_id);
     	$comment=new Comment();
     	$comment->article_id=$article_id;
     	$comment->user_id=Auth::user()->id;
@@ -41,4 +38,11 @@ class CommentController extends Controller
 		]);
 		return redirect()->route('article.show',[$comment->article->id]);
 	}
+    public function destroy($id)
+    {
+        $comment=Comment::find($id);
+        $comment->delete();
+        return redirect()->back();
+        //return redirect()->route('article.show',[$comment->article->id]);
+    }
 }

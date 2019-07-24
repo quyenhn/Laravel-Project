@@ -2,7 +2,7 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var redis = require('redis');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || '3000';
 server.listen(port);
 console.log("Server dang chay, lang nghe tren cong 3000!");
 io.on('connection',function(socket){

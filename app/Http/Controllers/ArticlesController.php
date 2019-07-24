@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Input;
 use App\Http\Requests\ArticleFormRequest;
 class ArticlesController extends Controller
 {  
+	public function __construct()
+    {
+        $this->middleware('auth')->except('index','show');
+        $this->middleware('checkforowner')->only('edit','update','destroy');
+    }
+
 	public function index(Request $request)
 	{   
 		/*if (!\Auth::check())

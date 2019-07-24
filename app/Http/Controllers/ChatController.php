@@ -7,9 +7,13 @@ use App\Message;
 use Redis;
 use App\Events\NewMessage;
 use Illuminate\Http\Request;
-
+use Helper;
 class ChatController extends Controller
-{
+{   
+    public function __construct()
+    {
+      $this->middleware('auth');
+    }
     public function get()
     {
         $contacts = User::find(auth()->user()->id)->friends();//->whereNotIn('id',auth()->id()) ;//dd($contacts);
@@ -89,12 +93,14 @@ class ChatController extends Controller
     }
     public function getAllUser()
     {
-         $users = User::all();
-         return response()->json($users);
+        // $users = User::all();
+        $users = Helper::loggedUsers();
+       // dd($users);
+        return response()->json($users);
     }
     public function send_public()
     {
-         $redis = Redis::connection();
+        $redis = Redis::connection();
         $redis->publish('message',"day la tin nhan test ne`");
         return "da published";
     }
