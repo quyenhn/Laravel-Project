@@ -4,7 +4,7 @@ var io = require('socket.io')(server);
 var redis = require('redis');
 const port = process.env.PORT || 3000;
 server.listen(port, function(){
-  console.log("Server dang chay, lang nghe tren cong 3000!");
+  console.log("Server dang chay, lang nghe tren cong: "+port);
 });
 io.on('connection',function(socket){
     console.log("Xin chao socketid: "+socket.id+' connected');
