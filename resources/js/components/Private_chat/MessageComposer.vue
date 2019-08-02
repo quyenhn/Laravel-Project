@@ -1,6 +1,6 @@
 <template>
     <div class="composer input-group">
-        <textarea class="form-control" v-model="message" @keydown.shift.enter="send" placeholder="Type your message here..."></textarea>
+        <textarea class="form-control" v-model="message" @keydown.enter="send" placeholder="Type your message here..."></textarea>
         <button class="btn btn-success btn-sm" @click="send"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</button>
     </div>
 </template>

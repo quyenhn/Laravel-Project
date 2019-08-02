@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use App\Message;
-use Redis;
+use LRedis;
 use App\Events\NewMessage;
 use Illuminate\Http\Request;
 use Helper;
@@ -18,8 +18,7 @@ class ChatController extends Controller
     {
         $contacts = User::find(auth()->user()->id)->friends();//->whereNotIn('id',auth()->id()) ;//dd($contacts);
         // User::where('id', '!=', auth()->user()->id)->get(); 
-        //return view('chat-room.index', compact('friends'));
-                // get a collection of items where sender_id is the user who sent us a message
+        // get a collection of items where sender_id is the user who sent us a message
         // and messages_count is the number of unread messages we have from him
         $unreadIds = Message::select(\DB::raw('"from" as sender_id, count("from") as messages_count'))
             ->where('to', auth()->id())
@@ -64,8 +63,6 @@ class ChatController extends Controller
     public function index()
     {
          return view('chat-room.index');
-        //  $friends = Auth::user()->friends();
-        // return view('chat-room.index', compact('friends'));
     }
 ////chat public
     public function getMessages()//get messages public
@@ -82,7 +79,7 @@ class ChatController extends Controller
             'text' => $request->text
         ]);
 
-        $redis = Redis::connection();
+        $redis = LRedis::connection();
         $redis->publish('message',json_encode($message));
         
         return response()->json($message,200);
@@ -100,7 +97,7 @@ class ChatController extends Controller
     }
     public function send_public()
     {
-        $redis = Redis::connection();
+        $redis = LRedis::connection();
         $redis->publish('message',"day la tin nhan test ne`");
         return "da published";
     }

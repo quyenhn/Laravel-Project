@@ -2,9 +2,9 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var redis = require('redis');
-
-server.listen(process.env.PORT || 6999 , function(){
-  console.log("Server dang chay, lang nghe tren cong: " + process.env.PORT || 6999);
+const port=process.env.PORT || '6999';
+server.listen( port , function(){
+  console.log("Server dang chay, lang nghe tren cong: " + port);
 });
 io.on('connection',function(socket){
     console.log("Xin chao socketid: "+socket.id+' connected');

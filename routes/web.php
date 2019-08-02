@@ -12,7 +12,7 @@
 Route::get('/send','ChatController@send_public');//test
 
 Route::get('/', 'PagesController@index');
-///group chat
+///public chat
 Route::get('/getAllUser','ChatController@getAllUser');
 Route::get('/messages','ChatController@getMessages');
 Route::post('/sendMessage','ChatController@sendMessage');

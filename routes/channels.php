@@ -12,11 +12,12 @@
 */
 
 Broadcast::channel('App.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+	return (int) $user->id === (int) $id;
 });
 Broadcast::channel('messages', function ($user) {
-    return $user;
+	return $user;
 });
 Broadcast::channel('messages.{id}', function ($user, $id) {
-    return $user->id === (int) $id;
+	return (int) $user->id === (int) $id;
 });
+

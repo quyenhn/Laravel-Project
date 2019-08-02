@@ -9,13 +9,8 @@ window.Vue = require('vue');
 
 import VueSocketio from 'vue-socket.io';
 import socketio from 'socket.io-client';
-var options = {
-          rememberUpgrade:true,
-          transports: ['websocket'],
-          secure:true, 
-          rejectUnauthorized: false
-              }
-Vue.use(VueSocketio,  socketio(':' + (process.env.PORT || 6999), options));   //(process.env.ROOT_URL+':'+process.env.PORT) );
+
+Vue.use(VueSocketio,  socketio(':' + (process.env.PORT || 6999)));   //(process.env.ROOT_URL+':'+process.env.PORT) );
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
