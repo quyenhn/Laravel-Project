@@ -42,11 +42,12 @@ $user = Auth::user();
                     <ul class="navbar-nav mr-auto menu">
 
                         @if(\Auth::check())
-                        <li class="nav-item"><a class="nav-link" href="{{route('article.create')}}">New article</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('users')}}">All users</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('news_feed')}}">News feed</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('chat.public_chat')}}">Public chat (SocketIO-Redis-Nodejs)</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('chat.index')}}">Private chat (Echo-Pusher)</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('article.create')}}">CreatePost</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('users')}}">FollowUser</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('news_feed')}}">NewsFeed</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('chat.public_chat')}}">PublicChat(SocketIO)</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('chat.index')}}">PrivateChat(Echo-Pusher)</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('socketchat.index')}}">Chat1-1(SocketIO)</a></li>
                         @endif
                     
                     </ul>

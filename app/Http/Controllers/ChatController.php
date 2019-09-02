@@ -95,6 +95,9 @@ class ChatController extends Controller
        // dd($users);
         return response()->json($users);
     }
+
+/////////// test 
+
     public function send_public()
     {
         $redis = LRedis::connection();

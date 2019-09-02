@@ -10,8 +10,13 @@
 |
 */
 Route::get('/send','ChatController@send_public');//test
-
+//
 Route::get('/', 'PagesController@index');
+/////socket chat
+Route::get('/socketchat', 'SocketController@index')->middleware('auth')->name('socketchat.index');
+Route::get('/socketchat/{id}', 'SocketController@show')->middleware('auth')->name('socketchat.show');
+Route::post('/socketchat/send','SocketController@store')->middleware('auth')->name('socketchat.store');
+
 ///public chat
 Route::get('/getAllUser','ChatController@getAllUser');
 Route::get('/messages','ChatController@getMessages');

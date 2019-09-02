@@ -26,6 +26,8 @@ Vue.component('Message', require('./components/Public_chat/Message.vue').default
 Vue.component('User', require('./components/Public_chat/User.vue').default);
 ///chat private
 Vue.component('chat-app', require('./components/Private_chat/ChatApp.vue').default);
+////socket chat
+Vue.component('socket_chat-component', require('./components/SocketChatComponent.vue'));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
