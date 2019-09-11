@@ -9,9 +9,21 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+////Admin area//////////
+Route::get('admin/login','Admin\AuthController@getLogin');
+Route::post('admin/login','Admin\AuthController@postLogin')->name('admin.login');
+Route::get('admin/register','Admin\AuthController@getRegister');
+Route::post('admin/register','Admin\AuthController@postRegister')->name('admin.register');
+Route::get('admin/dashboard','AdminController@getIndex')->name('admin.dashboard');
+Route::get('admin/logout','AdminController@getLogout');
+////end of admin area/////
 Route::get('/send','ChatController@send_public');//test
 //
 Route::get('/', 'PagesController@index');
+///messenger
+Route::get('/messenger', function () {
+    return view('messenger');
+})->middleware('auth')->name('messenger');
 /////socket chat
 Route::get('/socketchat', 'SocketController@index')->middleware('auth')->name('socketchat.index');
 Route::get('/socketchat/{id}', 'SocketController@show')->middleware('auth')->name('socketchat.show');
@@ -154,7 +166,7 @@ Route::get('email/resend', 'Auth\VerificationController@resend')->name('verifica
 
 // Authentication Routes new 5.8...
 Auth::routes();
-Route::get('logout', 'Auth\LoginController@logout');
+/*Route::get('logout', 'Auth\LoginController@logout');*/
 ///comment
 Route::group(['prefix'=>'/comment'],function(){
 	Route::post('/{article_id}',[	

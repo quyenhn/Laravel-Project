@@ -38,6 +38,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        
     }
     /*public function logout(Request $request) 
     {
@@ -46,41 +47,41 @@ class LoginController extends Controller
     //Auth::logout();
     //Session::flash('message', "Logout success sir!");
     //return Redirect::to('/login');
-    }*/
+   }*/
 
     // Overriding the authenticated method from Illuminate\Foundation\Auth\AuthenticatesUsers
-    protected function authenticated(Request $request, $user)
-    {
+   protected function authenticated(Request $request, $user)
+   {
         // Building namespace for Redis
-        $id = $user->id;
-        $browser = $request->server('HTTP_USER_AGENT');
-        $namespace = 'users:'.$id.$browser;
+    $id = $user->id;
+    $browser = $request->server('HTTP_USER_AGENT');
+    $namespace = 'users:'.$id.$browser;
 
         // Getting the expiration from the session config file. Converting from minutes to seconds.
-        $expire = config('session.lifetime') * 60;
+    $expire = config('session.lifetime') * 60;
 
         // Setting redis using id as value
-        Redis::SET($namespace,$id);
-        Redis::EXPIRE($namespace,$expire);
-    }
+    Redis::SET($namespace,$id);
+    Redis::EXPIRE($namespace,$expire);
+}
 
     // Overriding the logout method from Illuminate\Foundation\Auth\AuthenticatesUsers
-    public function logout(Request $request)
-    {
+public function logout(Request $request)
+{
         // Building namespace for Redis
-        $id = Auth::user()->id;
-        $browser = $request->server('HTTP_USER_AGENT');
-        $namespace = 'users:'.$id.$browser;
+    $id = Auth::user()->id;
+    $browser = $request->server('HTTP_USER_AGENT');
+    $namespace = 'users:'.$id.$browser;
 
         // Deleting user from redis database when they log out
-        Redis::DEL($namespace);
+    Redis::DEL($namespace);
 
-        $this->guard()->logout();
+    $this->guard()->logout();
 
-        $request->session()->flush();
+    $request->session()->flush();
 
-        $request->session()->regenerate();
+    $request->session()->regenerate();
 
-        return redirect('/');
-    }
+    return redirect('/');
+}
 }

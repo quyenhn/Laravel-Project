@@ -7,9 +7,11 @@ $user = Auth::user();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="user-id" content="{{ Auth::check() ? Auth::user()->id : 'null' }}">
+    
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="ws_url" content="{{ env('WS_URL') }}">
+    <meta name="user_id" content="{{ Auth::check() ? Auth::user()->id : 'null' }}">
 
     <title> @yield('head.title') </title>
 
@@ -21,6 +23,7 @@ $user = Auth::user();
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <!-- <link rel="stylesheet" href="{{asset('css/bootstrap4.min.css')}}"> -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/AdminLTE.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @yield('head.css')
 
@@ -28,7 +31,7 @@ $user = Auth::user();
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                 <img src="https://3.bp.blogspot.com/-mqlRgMRUrrU/WfgN34irWfI/AAAAAAAADqQ/8KA6OXN6gMAgOi0qlRod1Z5qtId7Yqf6QCLcBGAs/s1600/blogger_icon.png" style="height: 30px;"/>
                 {{  config('app.name', 'QBlog.com') }} 
@@ -42,12 +45,13 @@ $user = Auth::user();
                     <ul class="navbar-nav mr-auto menu">
 
                         @if(\Auth::check())
-                        <li class="nav-item"><a class="nav-link" href="{{route('article.create')}}">CreatePost</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('users')}}">FollowUser</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('news_feed')}}">NewsFeed</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('chat.public_chat')}}">PublicChat(SocketIO)</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('chat.index')}}">PrivateChat(Echo-Pusher)</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('socketchat.index')}}">Chat1-1(SocketIO)</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('article.create')}}">Create New Post</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('users')}}">Follow User</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('news_feed')}}">News Feed</a></li>
+                        <!-- {{-- <li class="nav-item"><a class="nav-link" href="{{route('chat.public_chat')}}">PublicChat(SocketIO)</a></li> --}} -->
+                        <li class="nav-item"><a class="nav-link" href="{{route('chat.index')}}">Private Chat(Echo-Pusher)</a></li>
+                        <!-- {{-- <li class="nav-item"><a class="nav-link" href="{{route('socketchat.index')}}">Chat1-1(SocketIO)</a></li> --}} -->
+                        <li class="nav-item"><a class="nav-link" href="{{route('messenger')}}">Private Chat(Nodejs-Socket.IO)</a></li>
                         @endif
                     
                     </ul>
@@ -92,7 +96,7 @@ $user = Auth::user();
             </div>
         </nav>
 
-        <main class="py-4" style="padding-top: 4.5rem !important;;">
+        <main class="py-4" style="padding-top: 4.5rem !important;">
             @yield('content')
             <div class="ajax-load text-center" style="display:none">
               <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More</p>
@@ -106,6 +110,10 @@ $user = Auth::user();
     <script src="{{ asset('js/jquery.min.js') }}" ></script>
     <script src="{{ asset('js/custom.js') }}" ></script>
     <script src="{{ asset('js/app.js') }}" ></script>
+
+    <script src="{{ asset('js/vue.js') }}"></script>
+    <script src="{{ asset('js/socket.io.js') }}"></script>
+    <script src="{{ asset('js/moment.min.js') }}"></script>
     @yield('body.js')
 </body>
 </html>

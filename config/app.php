@@ -169,6 +169,7 @@ return [
          */
         Collective\Html\HtmlServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        JeroenNoten\LaravelAdminLte\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
