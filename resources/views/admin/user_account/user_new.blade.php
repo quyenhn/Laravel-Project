@@ -21,6 +21,7 @@
     <div class="box">
         <div class="box-header with-border">
             <!--{{-- <span>Tổng số tài khoản </span><span class="badge badge-info">{{count($dataUser)}}</span>--}} -->
+            <label>Chọn ngày lọc dữ liệu</label>
         </div>
         <div class="box-body">
             <!-- {{--<table class="table table-bordered table-hover table-striped">
@@ -49,7 +50,25 @@
                 @endforeach
                 </tbody>
             </table> --}}-->
+            <form action="{{ route('admin.user_account.user_new') }}" method="GET">
+            <span>Start date:</span>
+            <span id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd"> <input value="{{ $startDate }}" name="start_date" class="form-control" readonly="" type="text"> <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> 
+            </span>
+            <span>End date:</span>
+            <span id="datepicker2" class="input-group date" data-date-format="yyyy-mm-dd"> <input value="{{ $endDate }}" name="end_date" class="form-control" readonly="" type="text"> <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> 
+            </span>
+            <button type="submit" class="btn btn-info" style="margin-bottom: 10px;">Lọc</button>
+            </form>
+
             <table class="table">
+                @if(!empty($alert_danger))
+                <div class="alert alert-danger"> {{ $alert_danger }}</div>
+                @endif
+                @if (!empty($alert_warning))
+              <div class="alert alert-warning"> {{ $alert_warning }}</div>
+                @endif
+
+            @if(!empty($dataUser))
                 @foreach ($dataUser as $day => $users_list)
                 <tr>
                     <th colspan="5"
@@ -68,6 +87,7 @@
                 </tr>
                 @endforeach
                 @endforeach
+            @endif
             </table>
         </div>
     </div>
@@ -94,14 +114,36 @@
 
 
 @section('css')
-
-    <link rel="stylesheet" href="/css/admin_custom.css">
+<link rel="stylesheet prefetch" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css">
+<style>
+.input-group{
+    display: inline-table;
+}
+#datepicker1,#datepicker2{
+    width:180px; 
+    margin: 0 20px 8px 10px;
+    vertical-align: middle;
+}
+#datepicker > span:hover{
+    cursor: pointer;
+}
+</style>
 
 @stop
 
 
 
 @section('js')
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+    $(function () {  
+        $("#datepicker1,#datepicker2").datepicker({         
+            autoclose: true,         
+            todayHighlight: true 
+        });//.datepicker('update', new Date());
+    });
+</script>
 
     <script>
         $(document).on("click", ".view-admin", function() {

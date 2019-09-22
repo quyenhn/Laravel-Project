@@ -8,6 +8,7 @@ use App\Http\Requests\CreateAdminRequest;
 use App\Repositories\backend\Admin\AdminRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 class AdminController extends Controller
 {
@@ -88,25 +89,46 @@ class AdminController extends Controller
         }
         
     }
-    public function user_new()
+    public function user_new(Request $request)
     {
     	//$dataUser=User::whereDate('created_at', Carbon::today())->get();
-        $dataUser=User::orderBy('created_at','desc')->get()->groupBy(function($item) {
+        $startDate = Input::get('start_date');
+      //  \Log::info('start date'.$startDate);
+        $endDate = Input::get('end_date'); 
+     //    \Log::info('end date'.$endDate);
+        if ($startDate>$endDate) 
+        {
+            return view('admin.user_account.user_new')->with('startDate',$startDate)->with('endDate',$endDate)->with('alert_danger', 'Ngày kết thúc phải sau ngày bắt đầu!');
+        }
+        $dataUser=User::whereBetween(\DB::raw('DATE(created_at)'),[$startDate,$endDate])->orderBy('created_at','desc')->get()->groupBy(function($item) {
             return $item->created_at->format('Y-m-d');
         });
-        //dd($dataUser);
-    	return view('admin.user_account.user_new',compact('dataUser'));
+       // dd($dataUser->isEmpty());
+        if ($dataUser->isEmpty() && $startDate!=null && $endDate!=null) {
+//            $request->session()->flash('alert', 'Không có kết quả!');
+            return view('admin.user_account.user_new')->with('startDate',$startDate)->with('endDate',$endDate)->with('alert_warning', 'Không có user nào đăng ký trong khoảng ngày đã chọn!');
+        }
+    	return view('admin.user_account.user_new',compact('dataUser','startDate','endDate'));
     }
     public function user_active()
     {   
         //$dataUser=User::where('last_login_at','>=', Carbon::now()->subMinute())->get();
         //$dataUser=User::whereDate('last_login_at', Carbon::today())->get();
-        $dataUser=\App\Activity::orderBy('day','desc')->get()->groupBy(function($item) {
+        $startDate = Input::get('start_date');
+        $endDate = Input::get('end_date'); 
+        if ($startDate>$endDate) 
+        {
+            return view('admin.user_account.user_active')->with('startDate',$startDate)->with('endDate',$endDate)->with('alert_danger', 'Ngày kết thúc phải sau ngày bắt đầu!');
+        }
+        $dataUser=\App\Activity::whereBetween('day',[$startDate,$endDate])->orderBy('day','desc')->get()->groupBy(function($item) {
             return $item->day;
         });
-       
+        if ($dataUser->isEmpty() && $startDate!=null && $endDate!=null) 
+        {
+            return view('admin.user_account.user_active')->with('startDate',$startDate)->with('endDate',$endDate)->with('alert_warning', 'Không có user nào hoạt động trong khoảng ngày đã chọn!');
+        }
         //dd($dataUser);
-        return view('admin.user_account.user_active',compact('dataUser'));
+        return view('admin.user_account.user_active',compact('dataUser','startDate','endDate'));
     }
      public function update_avatar(Request $request)
     {
