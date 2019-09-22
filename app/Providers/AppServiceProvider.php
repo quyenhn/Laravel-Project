@@ -17,7 +17,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $repositories = [
+            'backend\Admin\AdminRepositoryInterface'    => 'backend\Admin\AdminRepository',
+            
+          
+        ];
+        foreach ($repositories as $key=>$val){
+            $this->app->bind("App\\Repositories\\$key", "App\\Repositories\\$val");
+        }
     }
 
     /**

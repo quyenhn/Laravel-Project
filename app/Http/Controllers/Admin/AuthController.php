@@ -1,111 +1,45 @@
 <?php
 namespace App\Http\Controllers\Admin;
-use Auth;
+
 use App\Admin;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Auth\Events\Registered;
+use Auth;
 
 class AuthController extends Controller
-{
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
+{   
 
-    use RegistersUsers;
-    protected $guard = 'admin';
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-     protected $redirectTo = 'admin/dashboard';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-    	$this->middleware('guest:admin')->except('logout');
+    public function login(){
+        if (Auth::guard('admin')->check()){
+            return redirect()->route('admin.posts.list');
+        }
+        else{
+            return view('admin.login');
+        }
     }
 
-    public function getLogin()
-    {
-    	return view('admin.login');
+    public function processLogin(LoginRequest $request){
+        $dataRequest = $request->except('_token');
+        $user = Admin::where('name',$dataRequest['username'])->first();
+ //       dd($dataRequest);
+      //  dd($user);
+        if (Auth::guard('admin')->attempt(['name' => $dataRequest['username'], 'password' => $dataRequest['password']])){
+            $user->save();
+            // return view('admin.layouts.master');
+            return redirect()->route('admin.posts.list');
+        }
+        else{
+            return redirect()->back()->withErrors("Username hoặc mật khẩu không đúng");
+        }
     }
 
-       public function postLogin(Request $request)
+    public function logout(Request $request)
     {
-        // Validate the form data
-      $this->validate($request, [
-        'email'   => 'required|email',
-        'password' => 'required|min:8'
-      ]);
-      // Attempt to log the user in
-      if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-        // if successful, then redirect to their intended location
-        return redirect()->intended(route('admin.dashboard'));
-      }
-      // if unsuccessful, then redirect back to the login with the form data
-      return redirect()->back()->withInput($request->only('email', 'remember'));
+        Auth::guard('admin')->logout();
+       // $request->session()->flush();
+        //$request->session()->regenerate();
+        return redirect()->route( 'admin.login' );
     }
-
-    public function getRegister()
-    {
-    	return view('admin.register');
-    }
-
-    public function postRegister(Request $request)
-    {
-        $this->validator($request->all())->validate();
-
-        event(new Registered($user = $this->create($request->all())));
-
-        $this->guard()->login($user);
-
-        return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
-    }
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-    	return Validator::make($data, [
-    		'name' => ['required', 'string', 'max:255'],
-    		'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
-    		'password' => ['required', 'string', 'min:8', 'confirmed'],
-    	]);
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {   
-       return Admin::create([  //cho nay mac dinh return luon
-       	'name' => $data['name'],
-       	'email' => $data['email'],
-       	'password' => Hash::make($data['password']),
-       ]);
-   }
 }

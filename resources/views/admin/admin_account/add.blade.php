@@ -2,7 +2,7 @@
 
 
 
-@section('title', 'Freelancer')
+@section('title', 'Them Admin')
 
 
 
@@ -56,7 +56,7 @@
 
 @section('css')
 
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    
 
 @stop
 

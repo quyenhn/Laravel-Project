@@ -58,7 +58,7 @@ class HomeController extends Controller
   // dd($articles);
     $articles = Article::select('articles.*')
     ->join('followers','user_id','=','followers.leader_id')
-    ->Where('followers.follower_id',auth()->user()->id)
+    ->where('followers.follower_id',auth()->user()->id)
     ->orderBy('updated_at','desc')->paginate(  config('app.paginate_article') ); 
     if ($request->ajax()) 
     {

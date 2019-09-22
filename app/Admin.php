@@ -1,13 +1,14 @@
 <?php
 namespace App;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Admin extends Authenticatable 
 {   
     use Notifiable;
-    protected $guard = 'admin';
+    protected $table ="admins";
     /**
      * The attributes that are mass assignable.
      *

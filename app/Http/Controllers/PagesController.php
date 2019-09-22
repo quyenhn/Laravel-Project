@@ -12,6 +12,6 @@ class PagesController extends Controller
     	// $users = User::where('id','!=',auth()->user()->id)->get();
      //    return view('welcome',compact('users'));
     //	return view('welcome');
-    	return redirect('/articles');
+    	//return redirect('/articles');
     }
 }

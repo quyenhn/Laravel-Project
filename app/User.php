@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;*/
 //
+use Cache;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -26,7 +27,9 @@ class User extends Authenticatable /*Model implements //Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar',
+        'name', 'email', 'password', 'avatar', 
+        'last_login_at',
+        'last_login_ip',
     ];
 
     /**
@@ -85,5 +88,9 @@ class User extends Authenticatable /*Model implements //Authenticatable
     public function messages()
     {
       return $this->hasMany(Message::class);
+    }
+    public function isOnline()
+    {
+      return Cache::has('user-is-online-' . $this->id);
     }
 }

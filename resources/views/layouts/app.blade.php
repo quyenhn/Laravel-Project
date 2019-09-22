@@ -51,7 +51,7 @@ $user = Auth::user();
                         <!-- {{-- <li class="nav-item"><a class="nav-link" href="{{route('chat.public_chat')}}">PublicChat(SocketIO)</a></li> --}} -->
                         <li class="nav-item"><a class="nav-link" href="{{route('chat.index')}}">Private Chat(Echo-Pusher)</a></li>
                         <!-- {{-- <li class="nav-item"><a class="nav-link" href="{{route('socketchat.index')}}">Chat1-1(SocketIO)</a></li> --}} -->
-                        <li class="nav-item"><a class="nav-link" href="{{route('messenger')}}">Private Chat(Nodejs-Socket.IO)</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link" href="{{route('messenger')}}">Private Chat(Nodejs-Socket.IO)</a></li> -->
                         @endif
                     
                     </ul>
@@ -77,6 +77,10 @@ $user = Auth::user();
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{route('profile')}}">
                                         Change avatar
+                                    </a>
+
+                                     <a class="dropdown-item" href="{{route('user.view',auth()->id())}}">
+                                        My wall
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"

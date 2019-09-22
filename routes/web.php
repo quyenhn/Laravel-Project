@@ -10,16 +10,109 @@
 |
 */
 ////Admin area//////////
-Route::get('admin/login','Admin\AuthController@getLogin');
-Route::post('admin/login','Admin\AuthController@postLogin')->name('admin.login');
-Route::get('admin/register','Admin\AuthController@getRegister');
-Route::post('admin/register','Admin\AuthController@postRegister')->name('admin.register');
-Route::get('admin/dashboard','AdminController@getIndex')->name('admin.dashboard');
-Route::get('admin/logout','AdminController@getLogout');
+
+Route::get('admin', [
+    'as'    => 'admin.login',
+    'uses'  => 'Admin\AuthController@login'
+]);
+
+Route::post('admin', [
+    'as'    => 'admin.login',
+    'uses'  => 'Admin\AuthController@processLogin'
+]);
+
+Route::group(['middleware'  => 'isLogin'], function (){
+    Route::group(['prefix'  => 'admin'], function (){
+
+        //Admin Account
+        Route::group(['prefix' => 'admin_account'], function (){
+            
+                Route::get('index', [
+                    'as'    => 'admin.admin_account.index',
+                    'uses'  =>'AdminController@index'
+                ]);
+
+                Route::get('add', [
+                    'as'    => 'admin.admin_account.add',
+                    'uses'  => 'AdminController@add'
+                ]);
+
+                Route::post('add', [
+                    'as'    => 'admin.admin_account.add',
+                    'uses'  => 'AdminController@processAdd'
+                ]);
+
+                Route::get('delete/{id}', [
+                    'as'    => 'admin.admin_account.delete',
+                    'uses'  => 'AdminController@delete'
+                ]);
+            
+        });
+
+       // User Account
+        Route::group(['prefix' => 'user_account'], function (){
+            Route::get('index', [
+                'as'    => 'admin.user_account.index',
+                'uses'  => 'AdminController@getUserList'
+            ]);
+
+            Route::get('change_status/{id}', [
+                'as'    => 'admin.user_account.change_status',
+                'uses'  => 'AdminController@change_status'
+            ]);
+              Route::get('user_new', [
+                'as'    => 'admin.user_account.user_new',
+                'uses'  => 'AdminController@user_new'
+            ]);
+              Route::get('user_active',[
+              	'as'=>'admin.user_account.user_active',
+              	'uses'=>'AdminController@user_active'
+              ]);
+        });
+
+        //My Profile
+        Route::group(['prefix' => 'my_profile'], function (){
+            Route::get('', [
+                'as'    => 'admin.my_profile.index',
+                'uses'   => 'AdminController@my_profile'
+            ]);
+            Route::post('', 'AdminController@update_avatar');
+        });
+
+        //Logout
+        Route::post('/logout', [
+            'as'   => 'admin.logout',
+            'uses' => 'Admin\AuthController@logout'
+        ]);
+
+          //Posts
+        Route::group(['prefix' => 'posts'], function (){
+            Route::get('post_list', [
+                'as'    => 'admin.posts.list',
+                'uses'  => 'AdminController@post_list'
+            ]);
+
+            Route::get('post_new', [
+                'as'    => 'admin.posts.new',
+                'uses'  => 'AdminController@post_new'
+            ]);
+
+            Route::delete('/{id}',[
+            	'as'=>'admin.delete_post',
+            	'uses'=>'AdminController@delete_post'
+            ]);
+        });
+       
+    });
+});
 ////end of admin area/////
 Route::get('/send','ChatController@send_public');//test
 //
-Route::get('/', 'PagesController@index');
+Route::get('/',[
+		'as'=>'article.index',
+		'uses'=>'ArticlesController@index'
+	]);
+// Route::get('/', 'PagesController@index');
 ///messenger
 Route::get('/messenger', function () {
     return view('messenger');
@@ -68,16 +161,16 @@ Route::get('/news_feed', 'HomeController@index')->name('news_feed');
 
 /////Route Group articles//////
 Route::group(['prefix'=>'/articles'],function(){
-	Route::get('',[
+/*	Route::get('',[
 		'as'=>'article.index',
 		'uses'=>'ArticlesController@index'
-	]);
+	]);*/
 	Route::get('/create',[
 		// 'middleware'=>'auth',
 		'as'=>'article.create',
 		'uses'=>'ArticlesController@create'
 	]);
-	Route::post('',[
+	Route::post('/create',[
 		//'middleware'=>'auth',
 		'as'=>'article.store',
 		'uses'=>'ArticlesController@store'
@@ -166,7 +259,7 @@ Route::get('email/resend', 'Auth\VerificationController@resend')->name('verifica
 
 // Authentication Routes new 5.8...
 Auth::routes();
-/*Route::get('logout', 'Auth\LoginController@logout');*/
+
 ///comment
 Route::group(['prefix'=>'/comment'],function(){
 	Route::post('/{article_id}',[	

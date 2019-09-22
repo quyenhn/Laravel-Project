@@ -32,7 +32,7 @@ Cap nhat avatar ca nhan
         </div>
         <div class="row justify-content-center">
             <div class="profile-header-container">
-                <div class="profile-header-img">
+                <div class="profile-header-img" style="text-align: center;">
 
                     <!-- <div class="row">
                         <a href="{{route('news_feed')}}" class="btn btn-link">
@@ -41,7 +41,7 @@ Cap nhat avatar ca nhan
                         </a>
                     </div>
                     <br> -->
-                    <img class="rounded-circle-BO" src="/storage/avatars/{{ $user->avatar }}" alt="avatar" />
+                    <img class="rounded-circle-BO" src="/storage/avatars/{{ $user->avatar }}" alt="avatar" style="width: 70%;height: auto;" />
                     <!-- badge -->
                     <div class="rank-label-container text-center">
                         <h3><span class="label label-default rank-label">{{$user->name}}</span></h3>

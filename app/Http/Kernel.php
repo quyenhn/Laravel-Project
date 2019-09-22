@@ -36,6 +36,8 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\RefreshRedis::class,/////
+            \App\Http\Middleware\StatisticsUserActive::class,
+            // \App\Http\Middleware\LastUserActivity::class, //update time active only first time in day 
         ],
 
         'api' => [
@@ -63,6 +65,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'checkforowner'=>\App\Http\Middleware\CheckForOwner::class,
         'checkforcomment'=>\App\Http\Middleware\CheckForComment::class,
+        'isLogin' => \App\Http\Middleware\backend\CheckLogin::class,
+        'checkbanned'=>\App\Http\Middleware\CheckBanned::class,
     ];
 
     /**

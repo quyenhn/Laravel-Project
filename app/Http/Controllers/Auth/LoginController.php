@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 use Auth;
 use Session;
 use Redirect;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -37,9 +38,15 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware(['guest','checkbanned'])->except('logout');
         
     }
+
+   /* protected function credentials(\Illuminate\Http\Request $request) {
+        return ['email' => $request->{$this->username()}, 'password' => $request->password, 'active' => 1];
+
+    }*/
+
     /*public function logout(Request $request) 
     {
        Auth::logout();
@@ -52,6 +59,12 @@ class LoginController extends Controller
     // Overriding the authenticated method from Illuminate\Foundation\Auth\AuthenticatesUsers
    protected function authenticated(Request $request, $user)
    {
+    if(Auth::check() && Auth::user()->active == 1){
+        $user->update([
+            'last_login_at' => Carbon::now()->toDateTimeString(),
+            'last_login_ip' => $request->getClientIp()
+        ]);
+    }
         // Building namespace for Redis
     $id = $user->id;
     $browser = $request->server('HTTP_USER_AGENT');
@@ -77,10 +90,11 @@ public function logout(Request $request)
     Redis::DEL($namespace);
 
     $this->guard()->logout();
+   
 
-    $request->session()->flush();
+   // $request->session()->flush();
 
-    $request->session()->regenerate();
+    //$request->session()->regenerate();
 
     return redirect('/');
 }
