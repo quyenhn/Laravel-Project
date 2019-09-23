@@ -7,7 +7,7 @@
 
 
 @section('content_header')
-
+    {!! Charts::styles() !!}
     <h1>Danh sách User có hoạt động trên website trong các ngày</h1>
     <div class="alert alert-danger" {{(($errors->first()==null))?'hidden':''}}>
         {{$errors->first()}}
@@ -54,13 +54,21 @@
             </table> --}} -->
             <form action="{{ route('admin.user_account.user_active') }}" method="GET">
             <span>Start date:</span>
-            <span id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd"> <input value="{{ $startDate }}" name="start_date" class="form-control" readonly="" type="text"> <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> 
+            <span id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd"> <input value="{{ isset($startDate)?$startDate:
+            Carbon\Carbon::today()->format('Y-m-d') }}" name="start_date" class="form-control" readonly="" type="text"> <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> 
             </span>
             <span>End date:</span>
-            <span id="datepicker2" class="input-group date" data-date-format="yyyy-mm-dd"> <input value="{{ $endDate }}" name="end_date" class="form-control" readonly="" type="text"> <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> 
+            <span id="datepicker2" class="input-group date" data-date-format="yyyy-mm-dd"> <input value="{{ isset($endDate)?$endDate:
+            Carbon\Carbon::today()->format('Y-m-d') }}" name="end_date" class="form-control" readonly="" type="text"> <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> 
             </span>
             <button type="submit" class="btn btn-info" style="margin-bottom: 10px;">Lọc</button>
             </form>
+            
+             @if(!empty($chart))
+            {!! $chart->html() !!}
+            {!! Charts::scripts() !!}
+            {!! $chart->script() !!}
+            @endif
 
             @if(!empty($alert_danger))
             <div class="alert alert-danger"> {{ $alert_danger }}</div>
@@ -122,7 +130,7 @@
     display: inline-table;
 }
 #datepicker1,#datepicker2{
-    width:180px; 
+    width:150px; 
     margin: 0 20px 8px 10px;
     vertical-align: middle;
 }

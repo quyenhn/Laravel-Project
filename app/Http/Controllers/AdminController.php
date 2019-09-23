@@ -9,6 +9,7 @@ use App\Repositories\backend\Admin\AdminRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use Charts;
 
 class AdminController extends Controller
 {
@@ -90,7 +91,18 @@ class AdminController extends Controller
         
     }
     public function user_new(Request $request)
-    {
+    {   
+        /////// line chart
+        $users = User::where('created_at','>=',Carbon::now()->subDays(30)->toDateString())->get();
+                   // dd($users);
+        $chart = Charts::database($users, 'area', 'highcharts')
+                  ->title("Monthly New Register Users From The Last 30 Days")
+                  ->elementLabel("Total Users")
+                  ->dimensions(1000, 400)
+                  ->responsive(false)
+                  ->dateColumn('created_at')
+                  ->lastByDay(30); 
+        /////// end line chart
     	//$dataUser=User::whereDate('created_at', Carbon::today())->get();
         $startDate = Input::get('start_date');
       //  \Log::info('start date'.$startDate);
@@ -104,16 +116,27 @@ class AdminController extends Controller
             return $item->created_at->format('Y-m-d');
         });
        // dd($dataUser->isEmpty());
-        if ($dataUser->isEmpty() && $startDate!=null && $endDate!=null) {
+        if ($dataUser->isEmpty() && $startDate!=null && $endDate!=null) { 
 //            $request->session()->flash('alert', 'Không có kết quả!');
             return view('admin.user_account.user_new')->with('startDate',$startDate)->with('endDate',$endDate)->with('alert_warning', 'Không có user nào đăng ký trong khoảng ngày đã chọn!');
         }
-    	return view('admin.user_account.user_new',compact('dataUser','startDate','endDate'));
+    	return view('admin.user_account.user_new',compact('dataUser','startDate','endDate','chart'));
     }
     public function user_active()
-    {   
+    {    
+         /////// line chart
+        $users = \App\Activity::where('day','>=',Carbon::today()->subDays(30)->toDateString())->get();
+                  // dd($users);
+        $chart = Charts::database($users, 'line', 'highcharts')
+                  ->title("Daily Active Users From The Last 30 Days")
+                  ->elementLabel("Total Users")
+                  ->dimensions(1000, 400)
+                  ->responsive(false)
+                  ->dateColumn('day')
+                  ->lastByDay(30); 
+        /////// end line chart
+
         //$dataUser=User::where('last_login_at','>=', Carbon::now()->subMinute())->get();
-        //$dataUser=User::whereDate('last_login_at', Carbon::today())->get();
         $startDate = Input::get('start_date');
         $endDate = Input::get('end_date'); 
         if ($startDate>$endDate) 
@@ -128,7 +151,7 @@ class AdminController extends Controller
             return view('admin.user_account.user_active')->with('startDate',$startDate)->with('endDate',$endDate)->with('alert_warning', 'Không có user nào hoạt động trong khoảng ngày đã chọn!');
         }
         //dd($dataUser);
-        return view('admin.user_account.user_active',compact('dataUser','startDate','endDate'));
+        return view('admin.user_account.user_active',compact('dataUser','startDate','endDate','chart'));
     }
      public function update_avatar(Request $request)
     {

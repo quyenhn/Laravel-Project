@@ -33,8 +33,8 @@ class StatisticsUserActive
                                 'user_id' => Auth::id() 
                ]);
            }*/
-           
-           if(Activity::where('user_id',Auth::id())->where('day',Carbon::now()->toDateString())->first()==null)
+           // dd(Activity::where('user_id',Auth::id())->where('day',Carbon::now()->toDateString())->get()->isEmpty());
+           if(Activity::where('user_id',Auth::id())->where('day',Carbon::now()->toDateString())->get()->isEmpty())
            {
                 dispatch(new \App\Jobs\StatisticsActivity(Auth::user()));
            }
