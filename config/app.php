@@ -171,7 +171,7 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
+        // Barryvdh\Debugbar\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
