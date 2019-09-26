@@ -171,6 +171,7 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -236,6 +237,7 @@ return [
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Helper' => App\Http\Custom\Helper::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Charts;
+use Cache;
 
 class AdminController extends Controller
 {
@@ -90,11 +91,10 @@ class AdminController extends Controller
         }
         
     }
-    public function user_new(Request $request)
+    public function user_new()
     {   
         /////// line chart
-        $users = User::where('created_at','>=',Carbon::now()->subDays(30)->toDateString())->get();
-                   // dd($users);
+       $users = User::where('created_at','>',Carbon::now()->subDays(30)->toDateString())->get();// dd($users);
         $chart = Charts::database($users, 'area', 'highcharts')
                   ->title("Monthly New Register Users From The Last 30 Days")
                   ->elementLabel("Total Users")
@@ -104,20 +104,42 @@ class AdminController extends Controller
                   ->lastByDay(30); 
         /////// end line chart
     	//$dataUser=User::whereDate('created_at', Carbon::today())->get();
-        $startDate = Input::get('start_date');
+       $startDate = Input::get('start_date');  //dd(date('Y-m-d',strtotime($startDate."+1 days")));
       //  \Log::info('start date'.$startDate);
-        $endDate = Input::get('end_date'); 
+        $endDate = Input::get('end_date'); //dd($endDate->addDays(1));
      //    \Log::info('end date'.$endDate);
+        
         if ($startDate>$endDate) 
         {
             return view('admin.user_account.user_new')->with('startDate',$startDate)->with('endDate',$endDate)->with('alert_danger', 'Ngày kết thúc phải sau ngày bắt đầu!');
         }
+        
+        // $dataUser=Cache::rememberForever('CacheKey-'.$startDate,function() use ($startDate,$endDate)
+        // {
+        //     return User::whereBetween(\DB::raw('DATE(created_at)'),[$startDate,$endDate])->orderBy('created_at','desc')->get()->groupBy(function($item) 
+        //     {
+        //         return $item->created_at->format('Y-m-d');
+        //     });
+        // });
+
+            // for( $i=$startDate;$i<=$endDate;$i++ ) {
+            //     echo  $i."<br>";
+            //     if(!Cache::has('CacheKey-'.$i) )
+            //     {
+            //         Cache::forever('CacheKey-'.$i,
+            //             User::where(\DB::raw('DATE(created_at)'),$i)->orderBy('created_at','desc')->get()->groupBy(function($item){
+            //                 return $item->created_at->format('Y-m-d');
+            //             })
+            //         );
+            //     }
+            // }
+
         $dataUser=User::whereBetween(\DB::raw('DATE(created_at)'),[$startDate,$endDate])->orderBy('created_at','desc')->get()->groupBy(function($item) {
             return $item->created_at->format('Y-m-d');
         });
-       // dd($dataUser->isEmpty());
-        if ($dataUser->isEmpty() && $startDate!=null && $endDate!=null) { 
-//            $request->session()->flash('alert', 'Không có kết quả!');
+        
+        if ($dataUser->isEmpty() && $startDate!=null && $endDate!=null) 
+        { 
             return view('admin.user_account.user_new')->with('startDate',$startDate)->with('endDate',$endDate)->with('alert_warning', 'Không có user nào đăng ký trong khoảng ngày đã chọn!');
         }
     	return view('admin.user_account.user_new',compact('dataUser','startDate','endDate','chart'));
@@ -125,7 +147,7 @@ class AdminController extends Controller
     public function user_active()
     {    
          /////// line chart
-        $users = \App\Activity::where('day','>=',Carbon::today()->subDays(30)->toDateString())->get();
+        $users = \App\Activity::where('day','>',Carbon::today()->subDays(30)->toDateString())->get();
                   // dd($users);
         $chart = Charts::database($users, 'line', 'highcharts')
                   ->title("Daily Active Users From The Last 30 Days")

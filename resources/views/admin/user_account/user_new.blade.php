@@ -61,7 +61,7 @@
             </span>
             <button type="submit" class="btn btn-info" style="margin-bottom: 10px;">Lọc</button>
             </form>
-            
+
             @if(!empty($chart))
             {!! $chart->html() !!}
             {!! Charts::scripts() !!}
@@ -75,28 +75,29 @@
                 <div class="alert alert-warning"> {{ $alert_warning }}</div>
                 @endif
 
-            @if(!empty($dataUser))
-            <table class="table">
-                @foreach ($dataUser as $day => $users_list)
-                <tr>
-                    <th colspan="5"
-                    style="background-color: #F7F7F7">{{ $day }}: {{ $users_list->count() }} users registered</th>
-                </tr>
-                @foreach ($users_list as $user)
-                <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>Writer</td>
-                    <td class="text-center" width="5%">
-                        <button type="button" class="btn {{($user->active==1)?"btn-success":"btn-danger"}} view-admin" data-username="{{$user->name}}" data-id="{{$user->id}}" data-toggle="modal" data-target="#modal-danger">
-                                    {{($user->active==1)?"Unlocked":"Blocked"}}
-                        </button>
-                    </td>
-                </tr>
-                @endforeach
-                @endforeach
-            @endif
-            </table>
+            
+                <table class="table">
+                    @if(!empty($dataUser))
+                    @foreach ($dataUser as $day => $users_list)
+                    <tr>
+                        <th colspan="5"
+                        style="background-color: #F7F7F7">{{ $day }}: {{ $users_list->count() }} users registered</th>
+                    </tr>
+                    @foreach ($users_list as $user)
+                    <tr>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>Writer</td>
+                        <td class="text-center" width="5%">
+                            <button type="button" class="btn {{($user->active==1)?"btn-success":"btn-danger"}} view-admin" data-username="{{$user->name}}" data-id="{{$user->id}}" data-toggle="modal" data-target="#modal-danger">
+                                {{($user->active==1)?"Unlocked":"Blocked"}}
+                            </button>
+                        </td>
+                    </tr>
+                    @endforeach
+                    @endforeach
+                    @endif
+                </table>
         </div>
     </div>
     <!-- Modal -->

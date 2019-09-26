@@ -77,8 +77,9 @@
             <div class="alert alert-warning"> {{ $alert_warning }}</div>
             @endif
 
-            @if(!empty($dataUser))
-             <table class="table">
+            
+            <table class="table">
+                @if(!empty($dataUser))
                 @foreach ($dataUser as $day => $users_list)
                 <tr>
                     <th colspan="5"
@@ -91,13 +92,13 @@
                     <td>Writer</td>
                     <td class="text-center" width="5%">
                         <button type="button" class="btn {{($user->user->active==1)?"btn-success":"btn-danger"}} view-admin" data-username="{{$user->user->name}}" data-id="{{$user->user->id}}" data-toggle="modal" data-target="#modal-danger">
-                                    {{($user->user->active==1)?"Unlocked":"Blocked"}}
+                            {{($user->user->active==1)?"Unlocked":"Blocked"}}
                         </button>
                     </td>
                 </tr>
                 @endforeach
                 @endforeach
-            @endif
+                @endif
             </table>
         </div>
     </div>

@@ -121,4 +121,8 @@ public function destroy($id)
 	$article->delete();
 	return redirect()->route('news_feed');
 }
+public function notowner()
+{
+	return "<center>Bạn không có quyền sửa/xóa nội dung của user khác!!!</center>";
+}
 }

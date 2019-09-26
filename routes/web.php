@@ -113,10 +113,10 @@ Route::get('/',[
 		'uses'=>'ArticlesController@index'
 	]);
 // Route::get('/', 'PagesController@index');
-///messenger
-Route::get('/messenger', function () {
+///messenger bug
+/*Route::get('/messenger', function () {
     return view('messenger');
-})->middleware('auth')->name('messenger');
+})->middleware('auth')->name('messenger');*/
 /////socket chat
 Route::get('/socketchat', 'SocketController@index')->middleware('auth')->name('socketchat.index');
 Route::get('/socketchat/{id}', 'SocketController@show')->middleware('auth')->name('socketchat.show');
@@ -200,9 +200,7 @@ Route::group(['prefix'=>'/articles'],function(){
 		'uses'=>'ArticlesController@show'
 	]);
 });
-Route::get('/notowner',function(){
-	echo "<center>Bạn không có quyền sửa/xóa nội dung của user khác!!!</center>";
-})->name('notowner');
+Route::get('/notowner','ArticlesController@notowner')->name('notowner');
 /*Route::get('/articles',[
 	'as'=>'article.index',
 	'uses'=>'ArticlesController@index'

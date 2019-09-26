@@ -51,6 +51,7 @@ class User extends Authenticatable /*Model implements //Authenticatable
     ];
 
     /*protected $table = 'users';*/
+
     public function articles()
     {
         return $this->hasMany('App\Article','user_id','id');
