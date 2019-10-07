@@ -20,13 +20,24 @@ $user = Auth::user();
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    <script>document.getElementsByTagName("html")[0].className += " js";</script>
+    <link rel="stylesheet" href="{{asset('css/backtotop.css')}}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <!-- <link rel="stylesheet" href="{{asset('css/bootstrap4.min.css')}}"> -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/AdminLTE.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @yield('head.css')
-
+    <style>
+        .sf-snow-flake {
+            position: fixed;
+            top: -20px;
+            z-index: 99999;
+        }
+        .sf-snow-anim {
+            top: 110%;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -71,7 +82,7 @@ $user = Auth::user();
                         @else 
                             <li class="nav-item"><img src="/storage/avatars/{{ $user->avatar }}" style=" border-radius: 50%;width:50px;height: 50px;" alt="avatar"/></li>
                             <li class="nav-item dropdown">
-                               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                               <a style="margin-top: 6px;" id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -106,7 +117,7 @@ $user = Auth::user();
               <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More</p>
             </div>
         </main>
-
+        <a href="#" class="cd-top text-replace js-cd-top">Top</a>
         @include('partials.footer')
     </div> 
     <!-- Scripts -->
@@ -118,6 +129,21 @@ $user = Auth::user();
     <script src="{{ asset('js/vue.js') }}"></script>
     <script src="{{ asset('js/socket.io.js') }}"></script>
     <script src="{{ asset('js/moment.min.js') }}"></script>
+    <script src="{{asset('js/backtotop_util.js')}}"></script> <!-- util functions included in the CodyHouse framework -->
+    <script src="{{asset('js/backtotop_main.js')}}"></script>
     @yield('body.js')
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/130527/h5ab-snow-flurry.js"></script>
+    <script>
+        jQuery(document).ready(function($){
+            $(document).snowFlurry({
+                maxSize: 5,
+                numberOfFlakes: 100,
+                minSpeed: 10,
+                maxSpeed: 15,
+                color: '#fff',
+                timeout: 0
+            });
+        });
+    </script>
 </body>
 </html>

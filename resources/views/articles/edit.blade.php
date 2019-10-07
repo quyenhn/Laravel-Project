@@ -15,12 +15,12 @@ Chinh sua noi dung
 @section('content')
 <div class="container">
 	<div class="row justify-content-center">
-		<div class="col-sm-10 col-sm-offset-1">
+		<div class="col-sm-12 col-sm-offset-1">
 			<h2>Edit article</h2>
 		</div>
 	</div>
 	<div class="row justify-content-center">
-		<div class="col-sm-10 col-sm-offset-1">
+		<div class="col-sm-12 col-sm-offset-1">
 			@if (count($errors)>0)
 			<div class="alert alert-danger">
 				<strong>Canh bao!</strong>Co loi nhap lieu.<br><br>

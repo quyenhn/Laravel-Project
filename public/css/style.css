@@ -30,7 +30,7 @@ body{
 	background-position: top left;
 	background-attachment: fixed;
 }
-.col-sm-10{
+.col-sm-12{
 	background: #f2f2f2;
 	margin-bottom: 50px;
 	padding: 30px 70px 30px;
@@ -68,4 +68,8 @@ body{
 	clear: both;
 	display: block;
 	font-size: 1.8em;
+}
+.navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
+    color: rgba(0, 0, 0, 0.7);
+    background-color: whitesmoke;
 }

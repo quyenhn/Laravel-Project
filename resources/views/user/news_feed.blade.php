@@ -32,22 +32,22 @@ News feed ca nhan
   </div>
 </div>
 
-<div class="row justify-content-center" id="post-data">
-  {{--@foreach ($articles as $a)
-    <div class="col-sm-10">
-      <h2>{{$a->title}}</h2>
-      <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $a->image }}" />
+<div class="row justify-content-center">
+<!--   {{--@foreach ($articles as $a)
+  <div class="col-sm-10">
+    <h2>{{$a->title}}</h2>
+    <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $a->image }}" />
 
-      <small>Update at: {{$a->updated_at}}, Author: {{$a->user->name}}</small><br>
-      {{$a->description}} <br>
-      <div style="font-size: 20px;"> 
-        <a href="{{route('article.show',$a->id)}}" style="text-decoration: underline;">Read more</a>
-        &nbsp;
-        <a href="{{route('article.show',$a->id)}}" style="text-decoration: underline;">{{count($a->comments)}} comments</a>
-      </div>
+    <small>Update at: {{$a->updated_at}}, Author: {{$a->user->name}}</small><br>
+    {{$a->description}} <br>
+    <div style="font-size: 20px;"> 
+      <a href="{{route('article.show',$a->id)}}" style="text-decoration: underline;">Read more</a>
+      &nbsp;
+      <a href="{{route('article.show',$a->id)}}" style="text-decoration: underline;">{{count($a->comments)}} comments</a>
     </div>
-    @endforeach--}}
-    @include('articles.data')
+  </div>
+  @endforeach--}} -->
+    <div class="col-sm-10" id="post-data">@include('articles.data')</div>
   </div>
 
   @else

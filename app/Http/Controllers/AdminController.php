@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Charts;
 use Cache;
-
+use Redis;
 class AdminController extends Controller
 {
 	 public function __construct(AdminRepositoryInterface $admin)
@@ -138,6 +138,9 @@ class AdminController extends Controller
             return $item->created_at->format('Y-m-d');
         });
         
+        dd(\App\Activity::where( \DB::raw('DATE(day)') , \Carbon\Carbon::today()->toDateString() )->count());
+        die;
+
         if ($dataUser->isEmpty() && $startDate!=null && $endDate!=null) 
         { 
             return view('admin.user_account.user_new')->with('startDate',$startDate)->with('endDate',$endDate)->with('alert_warning', 'Không có user nào đăng ký trong khoảng ngày đã chọn!');

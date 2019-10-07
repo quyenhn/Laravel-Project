@@ -22,7 +22,7 @@ Chi tiet bai viet
 @section('content')
 <div class="container">
  <div class="row justify-content-center">
-   <div class="col-sm-10">
+   <div class="col-sm-12">
      <a href="{{route('news_feed')}}" class="btn btn-link">
        <i class="fas fa-chevron-left"></i>
        Back to your news feed
@@ -31,12 +31,25 @@ Chi tiet bai viet
  </div>
  
  <div class="row justify-content-center">
-  <div class="col-sm-10">
+  <div class="col-sm-12">
+    <div class="date">
+      <p><span class='day'>{{$article->created_at->format('d')}}</span>
+       <span>{{$article->created_at->format('M')}} / {{$article->created_at->year}}</span>
+     </p> 
+   </div>
     <h2 style="font-family: Arvo, Cambria, Georgia, Times, serif;font-size: 1.8em;">{{$article->title}}</h2>
     <img style="display: block;width: 100%;height: auto;" src="/storage/images/{{ $article->image }}" />
-    <small>Create at: {{$article->created_at}}, Update at: {{$article->updated_at}}, Author: {{$article->user->name}}, {{count($article->comments)}} comments</small>
-    <a style="float: right;" href="{{route('user.view',$article->user->id)}}">Follow at author's profile</a>
-    <br><br>
+    <small>
+    <i class="fas fa-user"></i> Written by: {{$article->user->name}}  | 
+    <!-- <i class="fas fa-folder-open"></i> Category: {{$article->category}} | -->
+    <i class="fas fa-calendar-plus"></i> Published: {{$article->created_at}} |
+    <!-- <i class="fas fa-calendar-alt"></i> Updated: {{$article->updated_at}}  | -->
+    <i class="fas fa-comments"></i> {{count($article->comments)}} comments |
+    <i class="fas fa-eye"></i> {{$article->view}} views
+    </small>
+    <a style="float: right; text-decoration: underline;" href="{{route('user.view',$article->user->id)}}">Follow at author's profile</a>
+    <p style="border-top: 1px dashed #b1b1b1;"> </p>
+    <br>
     <?php echo $article->content; ?>
     <hr>
     @if (\Auth::check() && $article->user_id==$user->id)
@@ -46,14 +59,14 @@ Chi tiet bai viet
       'method'=>'DELETE',
       'style'=>'display:inline'
       ]) !!}
-      <button class="btn btn-danger">Xóa bài viết</button>
+      <button onclick="return confirm('Are you sure DELETE this post?')" class="btn btn-danger">Xóa bài viết</button>
       {!! Form::close() !!}
       @endif
     </div>
   </div>
 
   <div class="row justify-content-center">
-   <div class="col-sm-10 ">
+   <div class="col-sm-12 ">
      <h4>Comments...</h4>
      @foreach($article->comments as $cm)
      <hr>
@@ -69,7 +82,7 @@ Chi tiet bai viet
       'method'=>'DELETE',
       'style'=>'display:inline'
       ]) !!}
-      <button class="btn btn-warning">Xóa comment</button>
+      <button onclick="return confirm('Are you sure DELETE this comment?')" class="btn btn-warning">Xóa comment</button>
       {!! Form::close() !!}
       @endif
       @endforeach
@@ -78,7 +91,7 @@ Chi tiet bai viet
 
   @if (\Auth::check()) 
   <div class="row justify-content-center">
-    <div class="col-sm-10">         
+    <div class="col-sm-12">         
      <!-- <form action="comment/{{$article->id}}" method="POST" role="form">
         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
       <div class="form-group"> 

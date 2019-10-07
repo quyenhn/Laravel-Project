@@ -68,12 +68,14 @@ class ArticlesController extends Controller
 		
 		$title=$request->input('title');
 		$description=$request->input('description');
+		$category=$request->input('category');
 		$request->image->storeAs('images',$imageName);
 		$content=$request->input('content');
 		$user_id=$user->id;
 		Article::create([
 			'title'=>$title,
 			'description'=>$description,
+			'category'=>$category,
 			'image'=>$imageName,
 			'content'=>$content,
 			'user_id'=>$user_id
@@ -108,6 +110,7 @@ public function update($id,ArticleFormRequest $request)
 	$article->update([
 		'title' =>$request->get('title'),
 		'description'=>$request->get('description'),
+		'category'=>$request->get('category'),
 		'image'=>$imageName,
 		'content'=>$request->get('content')
 	]);

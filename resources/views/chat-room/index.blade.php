@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 	<div class="row justify-content-center">
-		<div class="col-sm-12">
+		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">Messenger with your friends <i class="fa fa-heart" style="color:red;" aria-hidden="true"></i></div>
 				<div class="card-body">

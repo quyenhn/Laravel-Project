@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\StatsUserRegOfTheDay::class,
+        Commands\StatsUserActiveOfTheDay::class,
     ];
 
     /**
@@ -24,9 +25,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        // $schedule->command('inspire')->hourly();
          $schedule->command('userReg:day')->dailyAt('00:01');
+         $schedule->command('userActive:day')->dailyAt('00:01');
     }
 
     /**

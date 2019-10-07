@@ -17,12 +17,12 @@ Thêm bài viết mới vào blog
 @section('content')
 <div class="container">
 	<div class="row justify-content-center">
-		<div class="col-sm-10 col-sm-offset-1">
+		<div class="col-sm-12 col-sm-offset-1">
 			<h2>Add new article</h2>
 		</div>
 	</div>
 	<div class="row justify-content-center">
-		<div class="col-sm-10 col-sm-offset-1">
+		<div class="col-sm-12 col-sm-offset-1">
 			@if (count($errors)>0)
 			<div class="alert alert-danger">
 				<strong>Cảnh báo!</strong>Có lỗi xảy ra.<br><br>
@@ -58,7 +58,7 @@ Thêm bài viết mới vào blog
 	!!}
 
 	@include ('articles._form',['button_name'=>'Create'])
-	{!! Form::close()!!}
+{!! Form::close()!!}
 
 </div>
 </div>

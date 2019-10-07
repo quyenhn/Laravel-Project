@@ -13,24 +13,29 @@ Danh sách bài viết
     </div>
   </div>
   
-    
-    <div class="row justify-content-center" id="post-data">
-      
-        {{-- <h2>{{$a->title}}</h2>
-        <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $a->image }}" />
-        <small>Updated at: {{$a->updated_at}}, Author: {{$a->user->name}}</small>
-        <p> {{$a->description}} </p>
-        <div style="font-size: 20px;">
-          <a href="{{route('article.show',$a->id)}}" style="text-decoration: underline;">Read more</a>
-          &nbsp;
-          <a href="{{route('article.show',$a->id)}}"  style="text-decoration: underline;">{{count($a->comment)}} comments</a>
-        </div> --}}
-
-        @include('articles.data')
-      
-    </div>       
-    
-{{--    
+    <div class="row justify-content-center">
+      <!--   {{-- <h2>{{$a->title}}</h2>
+      <img style="display: block;max-width: 100%;height: auto;" src="/storage/images/{{ $a->image }}" />
+      <small>Updated at: {{$a->updated_at}}, Author: {{$a->user->name}}</small>
+      <p> {{$a->description}} </p>
+      <div style="font-size: 20px;">
+        <a href="{{route('article.show',$a->id)}}" style="text-decoration: underline;">Read more</a>
+        &nbsp;
+        <a href="{{route('article.show',$a->id)}}"  style="text-decoration: underline;">{{count($a->comment)}} comments</a>
+      </div> --}} -->
+      <div class="col-sm-10" id="post-data">@include('articles.data')</div>
+    <!--  <div class="col-sm-3">
+      <div class="card" style="position: sticky;top: 70px;">
+        <div class="card-header">POST CATEGORY</div>
+        <div class="card-body">
+          <ul>
+            <li>Cong nghe</li>
+          </ul>
+        </div>
+      </div>
+    </div> -->
+    </div>   
+<!-- {{--    
  @else  
   <div class="row ">
     <div class="col-sm-10 col-sm-offset-1">
@@ -67,7 +72,7 @@ Danh sách bài viết
     @endif
     </div>
   </div>
---}}
+--}} -->
 </div> <!-- end of container -->
 @stop
 
